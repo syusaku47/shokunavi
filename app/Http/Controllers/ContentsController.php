@@ -46,7 +46,7 @@ class ContentsController extends Controller
         ]);
     }
 
-    public function update(int $id, Request $request)
+    public function showEditForm(int $id, Request $request)
     {        
         $content = Content::find($id);
         $content->name = $request->name;
@@ -59,11 +59,9 @@ class ContentsController extends Controller
     public function show(int $id)
     {
         $content = Content::find($id);
-        // $comments = Comment::where('post_id',$id)->get();
-        $comments = $content->comments()->get(); //モデルクラスにおけるリレーション
+
         return view('contents/show',[
         'content' => $content,
-        'comments' => $comments
         ]);
     }
 
