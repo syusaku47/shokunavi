@@ -25,15 +25,21 @@ class CreateContent extends FormRequest
     {
         return [
             'name'=>'required|max:20',
-            'catchcopy'=>'required|max:50',
+            'catchcopy'=>'required|max:200',
+            'recommend'=>'required|max:200',
+            'food'=>'required|max:20',
+            'drink'=>'required|max:20',
         ];
     }
 
     public function attributes()
     {
         return [
-            'title' => 'タイトル',
-            'text' => '内容',
+            'name' => '店舗名',
+            'catchcopy' => 'お店紹介文',
+            'recommend' => '本日のおすすめ',
+            'food' => 'お食事',
+            'drink' => '飲み物',
         ];
     }
 }

@@ -28,6 +28,21 @@
                   
                   <label for="catchcopy">お店紹介文</label>
                   <textarea type="text" class="form-control pb-5" name="catchcopy" id="catchcopy" /></textarea>
+
+                  <label for="recommend">本日のおすすめ</label>
+                  <textarea type="text" class="form-control pb-5" name="recommend" id="recommend" /></textarea>
+
+                  <label for="food">食事メニュー</label>
+                  @for($i=0; $i<2; $i++)
+                    <input type="text" class="form-control mb-4" name="food[]" id="food" />
+                  @endfor
+                  
+                  <label for="drink">ドリンクメニュー</label>
+                  @for($i=0; $i<2; $i++)
+                    <input type="text" class="form-control mb-4" name="drink[]" id="drink" />
+                  @endfor
+
+                  @for($i=0; $i<2; $i++)<input type="hidden" name="num[]"/>@endfor
                 </div>
                 <div class="text-right">
 

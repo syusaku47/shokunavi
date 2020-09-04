@@ -17,7 +17,6 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('food',20);
             $table->string('drink',20);
-            $table->string('recommend',200);
             $table->integer('content_id')->unsigned()->nullable();
 
             $table->timestamps();

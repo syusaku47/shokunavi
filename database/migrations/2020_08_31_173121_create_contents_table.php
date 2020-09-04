@@ -18,6 +18,7 @@ class CreateContentsTable extends Migration
             $table->string('name',20);
             $table->string('image')->default('/default.jpg');
             $table->string('catchcopy',200);
+            $table->string('recommend',200);
             $table->integer('customer_id')->unsigned();
             $table->timestamps();
 

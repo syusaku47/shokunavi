@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateContent;
 use App\Models\Content;
+use App\Models\Menu;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
@@ -30,11 +31,23 @@ class ContentsController extends Controller
         $content->image = 'default.jpg';
         $content->catchcopy = $request->catchcopy;
         $content->customer_id = 1;
-        
+        $content->recommend = $request->recommend;
         $content->created_at = Carbon::now();
         $content->updated_at = Carbon::now();
-        $content->save();
-
+        $content->save(); 
+        
+        $i=0;
+        foreach ($request->num as $val) {
+            $menu = new Menu();
+            $menu->food = $request->food[$i];
+            $menu->drink = $request->drink[$i];
+            $menu->content_id = $content->id;
+            $menu->created_at = Carbon::now();
+            $menu->updated_at = Carbon::now();
+            $menu->save();
+            $i++;
+        }
+        
         return redirect()->route('contents.c_index');
     }
 
@@ -59,9 +72,11 @@ class ContentsController extends Controller
     public function show(int $id)
     {
         $content = Content::find($id);
+        $menus = $content->menus()->get();
 
         return view('contents/show',[
         'content' => $content,
+        'menus' => $menus
         ]);
     }
 
