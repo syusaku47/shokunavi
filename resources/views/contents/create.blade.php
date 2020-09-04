@@ -45,7 +45,6 @@
                   @for($i=0; $i<2; $i++)<input type="hidden" name="num[]"/>@endfor
                 </div>
                 <div class="text-right">
-
                   <button type="submit" class="btn btn-primary">送信</button>
                 </div>
               </form>

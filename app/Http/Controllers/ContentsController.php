@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateContent;
+use App\Http\Requests\EditContent;
 use App\Models\Content;
 use App\Models\Menu;
 use Carbon\Carbon;
@@ -51,24 +52,40 @@ class ContentsController extends Controller
         return redirect()->route('contents.c_index');
     }
 
-    public function edit($id)
+    public function showEditForm($id)
     {
         $content = Content::find($id);
+        $menus = $content->menus()->get();
+
         return view('contents/edit',[
-        'content' => $content
+        'content' => $content,
+        'menus' => $menus
         ]);
+        
     }
 
-    public function showEditForm(int $id, Request $request)
+    public function edit(int $id, EditContent $request)
     {        
         $content = Content::find($id);
         $content->name = $request->name;
         $content->catchcopy = $request->catchcopy;
+        $content->recommend = $request->recommend;
         $content->updated_at = Carbon::now();
         $content->save();
 
+        $menus = $content->menus()->get();
+        $i=0;
+        foreach ($menus as $menu) {
+            $menu->food = $request->food[$i];
+            $menu->drink = $request->drink[$i];
+            $menu->updated_at = Carbon::now();
+            $menu->save();
+            $i++;
+        }
+
         return redirect()->route('contents.c_index');
     }
+
     public function show(int $id)
     {
         $content = Content::find($id);
