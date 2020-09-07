@@ -3,7 +3,7 @@
   @section('content')
   <div class="d-flex align-items-center mt-4 mb-4">
   <div class="ml-auto boards__linkBox">
-    <a href="{{ route('contents.c_index')}}" class="btn btn-outline-dark">一覧</a>
+    <a href="{{ route('contents.index')}}" class="btn btn-outline-dark">一覧</a>
     <a href="{{ route('contents.edit',['id' => $content->id]) }}" class="btn btn-outline-dark">編集</a>
   </div>
 </div>

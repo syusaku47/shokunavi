@@ -11,12 +11,39 @@
     <link href="{{ asset('scss/app.scss') }}" rel="stylesheet">
     <link href="{{ asset('css/test.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>今日のごはん</title>
+    <title>食ナビ</title>
   </head>
+  <header>
+  <nav class="my-navbar">
+    <a class="my-navbar-brand" href="/">食なび</a>
+    <div class="my-navbar-control">
+      @if(Auth::check())
+        <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+        ｜
+        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      @else
+        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        ｜
+        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+      @endif
+    </div>
+  </nav>
+</header>
 <body>
-<div class="container">
+<div class="container bg-light">
   @yield('content')
 </div>
+@if(Auth::check())
+  <script>
+    document.getElementById('logout').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('logout-form').submit();
+    });
+  </script>
+@endif
 <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

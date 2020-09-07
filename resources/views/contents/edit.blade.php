@@ -5,7 +5,7 @@
 <div class="d-flex align-items-center">
   <h1>掲示板編集</h1>
   <div class="ml-auto boards__linkBox">
-    <a href=" {{ route('contents.c_index') }} " class="btn btn-outline-dark">一覧</a>
+    <a href=" {{ route('contents.index') }} " class="btn btn-outline-dark">一覧</a>
   </div>
 </div>
 @if ($errors->any())

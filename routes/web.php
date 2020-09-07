@@ -10,11 +10,37 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/c_index', 'ContentsController@c_index' ) ->name('contents.c_index');
-Route::get('/create', 'ContentsController@showCreateForm' ) ->name('contents.create');
-Route::post('/create', 'ContentsController@create' );
-Route::get('/contents/{id}', 'ContentsController@show' ) ->name('contents.show');
-Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
-Route::post('/contents/{id}/edit', 'ContentsController@edit' );
-Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
+//ユーザー認証不要
+Route::get('/home', 'HomeController@index')->name('home');
+
+//ユーザーログイン後
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/index', 'ContentsController@index' ) ->name('contents.index');
+    Route::get('/create', 'ContentsController@showCreateForm' ) ->name('contents.create');
+    Route::post('/create', 'ContentsController@create' );
+    Route::get('/contents/{id}', 'ContentsController@show' ) ->name('contents.show');
+    Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
+    Route::post('/contents/{id}/edit', 'ContentsController@edit' );
+    Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
+});
+
+// Route::get('/login', 'AuthController@getLogin')->name('login');
+// Route::post('/login', 'AuthController@postLogin')->name('login');
+
+Route::get('/', 'ContentsController@welcome' ) ->name('contents.welcom');
+
+//Customer認証不要
+Route::group(['prefix' => 'customer'], function() {
+    Route::get('/',         function () { return redirect('/customer/home'); });
+    Route::get('login',     'Customer\LoginController@showLoginForm')->name('customer.login');
+    Route::post('login',    'Customer\LoginController@login');
+});
+
+//Customerログイン後
+Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function() {
+    Route::post('logout',   'Customer\LoginController@logout')->name('customer.logout');
+    Route::get('home',      'Customer\HomeController@index')->name('customer.home');
+});
+

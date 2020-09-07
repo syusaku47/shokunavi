@@ -4,7 +4,7 @@
 <div class="d-flex align-items-center">
   <h1>店舗情報を入力してください</h1>
   <div class="ml-auto contents__linkBox">
-    <a href="/c_index" class="btn btn-outline-dark">戻る</a>
+    <a href="/index" class="btn btn-outline-dark">戻る</a>
   </div>
 </div>
     <div class="row">
@@ -53,3 +53,11 @@
         </div>
       </div>
 @endsection
+
+<script>
+
+  document.script function('click'){
+
+  }
+
+</script>

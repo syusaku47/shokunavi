@@ -8,15 +8,51 @@ use App\Models\Content;
 use App\Models\Menu;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ContentsController extends Controller
 {
-    public function c_index()
+
+    public function welcome()
     {
-        $contents = Content::all();
+        return view('contents/welcome');
+    }
+
+    public function index(Request $request)
+    {
+        // $contents = Content::all();
+        // $contents = DB::table('contents')
+        // ->select('id','name','catchcopy','recommend','updated_at')
+        // ->orderBy('updated_at','asc')
+        // ->paginate(20);
+
+        $search = $request->input('search');
+
+        // 検索フォーム
+        $query = DB::table('contents');
+
+        //もしキーワードがあったら
+        if($search !== null){
+            //全角スペースを半角に
+            $search_split = mb_convert_kana($search,'s');
+
+            //空白で区切る
+            $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
+
+            //単語をループで回す
+            foreach($search_split2 as $value)
+            {
+            $query->where('name','like','%'.$value.'%');
+            }
+        };
+        
+        $query->select('id','name','catchcopy','recommend','updated_at');
+        $query->orderBy('updated_at', 'asc');
+        $contents = $query->paginate(20);
+
     
-        return view('contents/c_index', [
+        return view('contents/index', [
             'contents' => $contents,
         ]);
     }
@@ -49,7 +85,7 @@ class ContentsController extends Controller
             $i++;
         }
         
-        return redirect()->route('contents.c_index');
+        return redirect()->route('contents.index');
     }
 
     public function showEditForm($id)
@@ -83,7 +119,7 @@ class ContentsController extends Controller
             $i++;
         }
 
-        return redirect()->route('contents.c_index');
+        return redirect()->route('contents.index');
     }
 
     public function show(int $id)
@@ -101,7 +137,7 @@ class ContentsController extends Controller
     {
         $content = Content::find($id);
         $content->delete();
-        return redirect()->route('contents.c_index');
+        return redirect()->route('contents.index');
     }
 }
 
