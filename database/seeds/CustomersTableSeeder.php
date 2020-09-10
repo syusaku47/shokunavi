@@ -12,9 +12,9 @@ class CustomersTableSeeder extends Seeder
     public function run()
     {
             DB::table('customers')->insert([
-                'name' => '鍋ぞう',
-                'email' => "sarryppp@gmail.com",
-                'password'=>"12345",
+                'name' => 'masu',
+                'email' => 'masu@email.com',
+                'password' => bcrypt('test1234'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

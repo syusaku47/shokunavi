@@ -18,7 +18,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: tomato;}</style>
 </head>
 <body>
     <div id="app">
@@ -42,11 +41,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ customer('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('customer.login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ customer('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('customer.register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -56,13 +55,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ customer('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('customer.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ customer('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

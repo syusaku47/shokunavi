@@ -24,12 +24,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
     Route::post('/contents/{id}/edit', 'ContentsController@edit' );
     Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
+    Route::get('/contents/like/{id}', 'ContentsController@like')->name('reply.like');
+    Route::get('/contents/unlike/{id}', 'ContentsController@unlike')->name('reply.unlike');
+    Route::post('/contents/{post}/likes', 'LikesController@store');
+    Route::post('/contents/{post}/likes/{like}', 'LikesController@destroy');
 });
-
-// Route::get('/login', 'AuthController@getLogin')->name('login');
-// Route::post('/login', 'AuthController@postLogin')->name('login');
-
-Route::get('/', 'ContentsController@welcome' ) ->name('contents.welcom');
 
 //Customer認証不要
 Route::group(['prefix' => 'customer'], function() {
@@ -42,5 +41,12 @@ Route::group(['prefix' => 'customer'], function() {
 Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function() {
     Route::post('logout',   'Customer\LoginController@logout')->name('customer.logout');
     Route::get('home',      'Customer\HomeController@index')->name('customer.home');
+    Route::get('/index', 'ContentsController@index' ) ->name('contents.index');
+    Route::get('/create', 'ContentsController@showCreateForm' ) ->name('contents.create');
+    Route::post('/create', 'ContentsController@create' );
+    Route::get('/contents/{id}', 'ContentsController@show' ) ->name('contents.show');
+    Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
+    Route::post('/contents/{id}/edit', 'ContentsController@edit' );
+    Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
 });
 
