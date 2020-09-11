@@ -9,31 +9,33 @@
             <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{ asset('scss/app.scss') }}" rel="stylesheet">
-    <link href="{{ asset('css/test.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>食ナビ</title>
+    <title>食なび</title>
   </head>
   <header>
-  <nav class="my-navbar">
-    <a class="my-navbar-brand" href="/">食なび</a>
-    <div class="my-navbar-control">
+  <div class="bg-white border-bottom mb-5">
+  <nav class="navbar navbar-expand navbar-light container">
+    
       @if(Auth::check())
-        <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+    <a class="navbar-brand mr-4" href="{{ route('contents.index') }}">食なび</a>
+        <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
-        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+        <a href="#" id="logout" class="navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+      <a class="navbar-brand mr-4" href="{{ route('login') }}">食なび</a>
+        <a class="navbar-item" href="{{ route('login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="navbar-item" href="{{ route('register') }}">会員登録</a>
       @endif
-    </div>
   </nav>
+  </div>
 </header>
-<body>
-<div class="container bg-light">
+<body class="bg-light">
+<div class="container">
   @yield('content')
 </div>
 @if(Auth::check())

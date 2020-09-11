@@ -26,7 +26,7 @@ class CreateLikesTable extends Migration
 
             $table->foreign('content_id')
             ->references('id')
-            ->on('posts')
+            ->on('contents')
             ->onDelete('cascade');
 
         });

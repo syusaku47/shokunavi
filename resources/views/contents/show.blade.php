@@ -15,37 +15,24 @@
   </div>
   <div class="card-body">
     <p class="card-text">{{ $content->catchcopy}}</p>
-
-    <!-- <p class="text-right font-weight-bold mr-10">作成者名</p> -->
+    <p class="card-text">{{ $content->recommend}}</p>
   </div>
 </div>
+
+@include('share.menu')
 
   <!-- 削除フォーム -->
   <form method="POST" action="{{ route('contents.destroy',['id' => $content->id]) }}">
   @csrf
 <div class="text-right">
-  <input type="submit" class="btn btn-outline-denger" value="コンテンツ削除" data-id="{{ $content->id }}" onclick="deleteContent(this);">
+  <input type="submit" class="btn btn-danger" value="店舗情報削除" data-id="{{ $content->id }}" onclick="deleteContent(this);">
 </div>
   </form>
-
-  <!-- 食べ物、ドリンク情報 -->
-  <div class="row">
-  <div class="col-6">食べ物</div>
-  <div class="col-6">飲み物</div>
-  @foreach ($menus as $menu)
-    <div class="col-6">{{ $menu->food}}</div>
-    <div class="col-6">{{ $menu->drink}}</div>
-    @endforeach
-    </div>
-
-
 <script>
-<!--
-/************************************
-削除ボタンを押してすぐにレコードが削除されないように
-javascriptで確認メッセージを流します。
-*************************************/
-//-->
+
+// ************************************
+// 削除ボタンを押してすぐにレコードが削除されないようにjavascriptで確認メッセージを流します。
+// *************************************
 function deleteContent(e) {
     'use strict';
     if (confirm('本当に削除していいですか?')) {

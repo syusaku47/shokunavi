@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = '/user_index';
 
     /**
      * Create a new controller instance.
@@ -37,4 +37,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // protected function loggedOut(Request $request)
+    // {
+    //     return redirect(route('login'));
+    // }
 }

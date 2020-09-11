@@ -16,18 +16,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //ユーザーログイン後
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/index', 'ContentsController@index' ) ->name('contents.index');
-    Route::get('/create', 'ContentsController@showCreateForm' ) ->name('contents.create');
-    Route::post('/create', 'ContentsController@create' );
-    Route::get('/contents/{id}', 'ContentsController@show' ) ->name('contents.show');
-    Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
-    Route::post('/contents/{id}/edit', 'ContentsController@edit' );
-    Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
-    Route::get('/contents/like/{id}', 'ContentsController@like')->name('reply.like');
-    Route::get('/contents/unlike/{id}', 'ContentsController@unlike')->name('reply.unlike');
-    Route::post('/contents/{post}/likes', 'LikesController@store');
-    Route::post('/contents/{post}/likes/{like}', 'LikesController@destroy');
+Route::group(['prefix' => 'contents', 'middleware' => 'auth'], function() {
+    Route::get('user_index', 'ContentsController@user_index' ) ->name('contents.user_index');
+    Route::get('{id}', 'ContentsController@user_show' ) ->name('contents.user_show');
+    Route::post('{id}/likes', 'LikesController@store');
+    Route::post('{id}/likes/{like}', 'LikesController@destroy');
 });
 
 //Customer認証不要

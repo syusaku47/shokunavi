@@ -7,26 +7,20 @@ use App\Http\Requests\EditContent;
 use App\Models\Content;
 use App\Models\Menu;
 use Carbon\Carbon;
+use Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ContentsController extends Controller
 {
-
-    public function welcome()
+    public function __construct()
     {
-        return view('contents/welcome');
+        $this->middleware('auth', array('except' => 'index'));
     }
 
-    public function index(Request $request)
+    public function user_index(Request $request)
     {
-        // $contents = Content::all();
-        // $contents = DB::table('contents')
-        // ->select('id','name','catchcopy','recommend','updated_at')
-        // ->orderBy('updated_at','asc')
-        // ->paginate(20);
-
         $search = $request->input('search');
 
         // 検索フォーム
@@ -47,10 +41,22 @@ class ContentsController extends Controller
             }
         };
         
-        $query->select('id','name','catchcopy','recommend','updated_at');
-        $query->orderBy('updated_at', 'asc');
+        $query->select('id','name','catchcopy','recommend','image','updated_at');
+        $query->orderBy('updated_at', 'desc');
         $contents = $query->paginate(20);
 
+        return view('contents/user_index', [
+            'contents' => $contents,
+        ]);
+    }
+
+    public function index(Request $request)
+    {
+        $contents = Content::all();
+        $contents = DB::table('contents')
+        ->select('id','name','catchcopy','recommend','image','updated_at')
+        ->orderBy('updated_at','desc')
+        ->paginate(20);
     
         return view('contents/index', [
             'contents' => $contents,
@@ -101,11 +107,20 @@ class ContentsController extends Controller
     }
 
     public function edit(int $id, EditContent $request)
-    {        
+    {      
+        if ($file = $request->image) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('uploads/');
+            $file->move($target_path, $fileName);
+        } else {
+            $fileName = "";
+        }
+
         $content = Content::find($id);
         $content->name = $request->name;
         $content->catchcopy = $request->catchcopy;
         $content->recommend = $request->recommend;
+        $content->image = $fileName;
         $content->updated_at = Carbon::now();
         $content->save();
 
@@ -131,6 +146,19 @@ class ContentsController extends Controller
         'content' => $content,
         'menus' => $menus
         ]);
+    }
+
+    public function user_show(int $id)
+    {
+        $content = Content::findOrFail($id); // findOrFail 見つからなかった時の例外処理
+        $like = $content->likes()->where('user_id', Auth::user()->id)->first();
+        $menus = $content->menus()->get();
+
+        return view('contents.user_show')->with(array('content' => $content, 'like' => $like, 'menus'=>$menus));
+            // return view('contents/user_show',[
+            // 'content' => $content,
+            // 'menus' => $menus
+            // ]);
     }
 
     public function destroy($id)
