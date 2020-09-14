@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -37,7 +40,17 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:customer');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('customer');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('customer.register');
     }
 
     /**
