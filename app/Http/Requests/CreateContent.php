@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateContent extends FormRequest
@@ -28,8 +27,8 @@ class CreateContent extends FormRequest
             'name'=>'required|max:20',
             'catchcopy'=>'required|max:200',
             'recommend'=>'required|max:200',
-            'food'=>'required|max:20',
-            'drink'=>'required|max:20',
+            'food'=>'max:20',
+            'drink'=>'max:20',
         ];
     }
 

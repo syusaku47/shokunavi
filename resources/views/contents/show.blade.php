@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('user_layout')
 
   @section('content')
   <div class="d-flex align-items-center mt-4 mb-4">

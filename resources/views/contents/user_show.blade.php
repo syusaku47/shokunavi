@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('user.layout')
 
   @section('content')
   <div class='text-right mb-4'>

@@ -52,10 +52,15 @@ class LoginController extends Controller
     
     public function logout(Request $request)
     {
-        Auth::guard('customer')->logout();  //変更
+        Auth::guard()->logout();  //変更
         $request->session()->flush();
         $request->session()->regenerate();
  
         return redirect('/customer/login');  //変更
+    }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect(route('/customer/login'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('customer_layout')
 
   @section('content')
   <!-- <div class="top-wrapper mb-4 text-center">

@@ -18,15 +18,15 @@
   <nav class="navbar navbar-expand navbar-light container">
     
       @if(Auth::check())
-    <a class="navbar-brand mr-4" href="{{ route('contents.index') }}">食なび</a>
+    <a class="navbar-brand mr-4" href="{{ route('contents.user_index') }}">食なび</a>
         <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-      <a class="navbar-brand mr-4" href="{{ route('login') }}">食なび</a>
+      <a class="navbar-brand mr-4" href="{{ route('contents.user_index') }}">食なび</a>
         <a class="navbar-item" href="{{ route('login') }}">ログイン</a>
         ｜
         <a class="navbar-item" href="{{ route('register') }}">会員登録</a>

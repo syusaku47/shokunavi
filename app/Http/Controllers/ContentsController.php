@@ -14,10 +14,10 @@ use Illuminate\Http\Request;
 
 class ContentsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', array('except' => 'index'));
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', array('except' => 'index'));
+    // }
 
     public function user_index(Request $request)
     {

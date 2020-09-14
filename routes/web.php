@@ -17,10 +17,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //ユーザーログイン後
 Route::group(['prefix' => 'contents', 'middleware' => 'auth'], function() {
-    Route::get('user_index', 'ContentsController@user_index' ) ->name('contents.user_index');
-    Route::get('{id}', 'ContentsController@user_show' ) ->name('contents.user_show');
-    Route::post('{id}/likes', 'LikesController@store');
-    Route::post('{id}/likes/{like}', 'LikesController@destroy');
+    Route::get('/user_index', 'ContentsController@user_index' ) ->name('contents.user_index');
+    Route::get('/{id}', 'ContentsController@user_show' ) ->name('contents.user_show');
+    Route::post('/{id}/likes', 'LikesController@store');
+    Route::post('/{id}/likes/{like}', 'LikesController@destroy');
 });
 
 //Customer認証不要

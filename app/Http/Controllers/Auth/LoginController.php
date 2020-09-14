@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user_index';
+    protected $redirectTo = 'contents/user_index';
 
     /**
      * Create a new controller instance.
@@ -38,8 +39,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // protected function loggedOut(Request $request)
-    // {
-    //     return redirect(route('login'));
-    // }
+    protected function loggedOut(Request $request)
+    {
+        return redirect(route('login'));
+    }
+
+
 }
