@@ -22,14 +22,14 @@
         <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('customer.auth.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
       <a class="navbar-brand mr-4" href="{{ route('contents.index') }}">食なび</a>
-        <a class="navbar-item" href="{{ route('customer.login') }}">ログイン</a>
+        <a class="navbar-item" href="{{ route('customer.auth.login') }}">ログイン</a>
         ｜
-        <a class="navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="navbar-item" href="{{ route('customer.atuh.register') }}">会員登録</a>
       @endif
   </nav>
   </div>

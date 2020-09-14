@@ -26,13 +26,15 @@ Route::group(['prefix' => 'contents', 'middleware' => 'auth'], function() {
 //Customer認証不要
 Route::group(['prefix' => 'customer'], function() {
     Route::get('/',         function () { return redirect('/customer/home'); });
-    Route::get('login',     'Customer\LoginController@showLoginForm')->name('customer.login');
-    Route::post('login',    'Customer\LoginController@login');
+    Route::get('/login',     'Customer\Auth\LoginController@showLoginForm')->name('customer.auth.login');
+    Route::post('/login',    'Customer\Auth\LoginController@login');
+    Route::get('/auth/register', 'Customer\Auth\RegisterController@showRegistrationForm')->name('customer.auth.register');
+    Route::post('/auth/register', 'Customer\Auth\RegisterController@register');
 });
 
 //Customerログイン後
 Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function() {
-    Route::post('logout',   'Customer\LoginController@logout')->name('customer.logout');
+    Route::post('/auth/logout',   'Customer\Auth\LoginController@logout')->name('customer.auth.logout');
     Route::get('home',      'Customer\HomeController@index')->name('customer.home');
     Route::get('/index', 'ContentsController@index' ) ->name('contents.index');
     Route::get('/create', 'ContentsController@showCreateForm' ) ->name('contents.create');

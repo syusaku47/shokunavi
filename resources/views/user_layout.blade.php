@@ -22,7 +22,7 @@
         <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
