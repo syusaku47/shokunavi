@@ -65,6 +65,18 @@
                             </div>
                         </div>
                     </form>
+                    <div id="open">
+                            詳細を見る
+                        </div>
+
+                        <div id="mask" class="hidden"></div>
+
+                        <section id="modal" class="hidden">
+                            <p>こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。こんにちは。</p>
+                            <div id="close">
+                            閉じる
+                            </div>
+                        </section>
                 </div>
             </div>
         </div>

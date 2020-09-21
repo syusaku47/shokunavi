@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToMenusTable extends Migration
+class CreateCategorysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddColumnsToMenusTable extends Migration
      */
     public function up()
     {
-        Schema::table('menus', function (Blueprint $table) {
-            $table->integer('price')->default(0);
+        Schema::create('categorys', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name',20);
+            $table->integer('hot')->default(0);
+            $table->integer('spice')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddColumnsToMenusTable extends Migration
      */
     public function down()
     {
-        Schema::table('menus', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('categorys');
     }
 }

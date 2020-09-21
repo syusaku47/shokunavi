@@ -18,7 +18,7 @@ class Like extends Model
 
     protected $fillable = ['user_id', 'content_id'];
 
-    public function Content()
+    public function content()
     {
         return $this->belongsTo('App\Models\Content');
     }

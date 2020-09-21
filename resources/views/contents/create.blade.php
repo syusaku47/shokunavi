@@ -34,12 +34,16 @@
 
                   <label for="food">食事メニュー</label>
                   @for($i=0; $i<2; $i++)
-                    <input type="text" class="form-control mb-4" name="food[]" id="food" />
+                    <input type="text" class="form-control mb-4" name="food_name[]" id="food" />
+                    <input type="number" class="form-control mb-4" name="food_price[]" id="food" />
+                    <textarea type="text" class="form-control mb-4" name="food_discription[]" id="food" /></textarea>
                   @endfor
                   
                   <label for="drink">ドリンクメニュー</label>
                   @for($i=0; $i<2; $i++)
-                    <input type="text" class="form-control mb-4" name="drink[]" id="drink" />
+                    <input type="text" class="form-control mb-4" name="drink_name[]" id="drink" />
+                    <input type="tnumber" class="form-control mb-4" name="drink_price[]" id="drink" />
+                    <textarea type="text" class="form-control mb-4" name="drink_discription[]" id="drink" /></textarea>
                   @endfor
 
                   @for($i=0; $i<2; $i++)<input type="hidden" name="num[]"/>@endfor

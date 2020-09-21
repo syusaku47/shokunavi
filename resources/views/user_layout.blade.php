@@ -19,7 +19,7 @@
     
       @if(Auth::check())
     <a class="navbar-brand mr-4" href="{{ route('contents.user_index') }}">食なび</a>
-        <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
+        <span class="navbar-item "><a href="{{ route('user.edit') }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

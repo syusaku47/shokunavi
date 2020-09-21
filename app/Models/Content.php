@@ -4,14 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Menu;
+use App\Models\Food;
+use App\Models\Drink;
 use Auth;
 use App\Models\Like;
 
 class Content extends Model
 {
-    public function menus()
+    public function foods()
     {
-        return $this->hasMany('App\Models\Menu');
+        return $this->hasMany('App\Models\Food');
+    }
+
+    public function drinks()
+    {
+        return $this->hasMany('App\Models\Drink');
     }
 
     protected $fillable = ['title', 'body', 'summary', 'user_id'];

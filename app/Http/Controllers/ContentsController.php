@@ -6,6 +6,8 @@ use App\Http\Requests\CreateContent;
 use App\Http\Requests\EditContent;
 use App\Models\Content;
 use App\Models\Menu;
+use App\Models\Food;
+use App\Models\Drink;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\View;
@@ -81,13 +83,26 @@ class ContentsController extends Controller
         
         $i=0;
         foreach ($request->num as $val) {
-            $menu = new Menu();
-            $menu->food = $request->food[$i];
-            $menu->drink = $request->drink[$i];
-            $menu->content_id = $content->id;
-            $menu->created_at = Carbon::now();
-            $menu->updated_at = Carbon::now();
-            $menu->save();
+            $food = new Food();
+            $food->name = $request->food_name[$i];
+            $food->price = $request->food_price[$i];
+            $food->description = $request->description[$i];
+            $food->spice = $request->spice[$i];
+            $food->content_id = $content->id;
+            $food->created_at = Carbon::now();
+            $food->updated_at = Carbon::now();
+            $food->save();
+
+            $drink = new Food();
+            $drink->name = $request->drink_name[$i];
+            $drink->price = $request->drink_price[$i];
+            $drink->description = $request->description[$i];
+            $drink->hot = $request->hot[$i];
+            $drink->content_id = $content->id;
+            $drink->created_at = Carbon::now();
+            $drink->updated_at = Carbon::now();
+            $drink->save();
+
             $i++;
         }
         
