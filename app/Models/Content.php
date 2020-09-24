@@ -11,14 +11,9 @@ use App\Models\Like;
 
 class Content extends Model
 {
-    public function foods()
+    public function menus()
     {
-        return $this->hasMany('App\Models\Food');
-    }
-
-    public function drinks()
-    {
-        return $this->hasMany('App\Models\Drink');
+        return $this->hasMany('App\Models\Menu');
     }
 
     protected $fillable = ['title', 'body', 'summary', 'user_id'];

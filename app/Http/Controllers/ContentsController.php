@@ -6,8 +6,6 @@ use App\Http\Requests\CreateContent;
 use App\Http\Requests\EditContent;
 use App\Models\Content;
 use App\Models\Menu;
-use App\Models\Food;
-use App\Models\Drink;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\View;
@@ -71,6 +69,7 @@ class ContentsController extends Controller
 
     public function create(CreateContent $request)
     {
+        // dd($request);
         $content = new Content();
         $content->name = $request->name;
         $content->image = 'default.jpg';
@@ -80,32 +79,36 @@ class ContentsController extends Controller
         $content->created_at = Carbon::now();
         $content->updated_at = Carbon::now();
         $content->save(); 
-        
-        $i=0;
+        $f = 2;
+        $i = 0;
         foreach ($request->num as $val) {
-            $food = new Food();
-            $food->name = $request->food_name[$i];
-            $food->price = $request->food_price[$i];
-            $food->description = $request->description[$i];
-            $food->spice = $request->spice[$i];
-            $food->content_id = $content->id;
-            $food->created_at = Carbon::now();
-            $food->updated_at = Carbon::now();
-            $food->save();
+            $menu = new Menu();
+            
+            //ドリンクの時
+            if( $i >= $f ){
+                $menu->name = $request->menu_name[$i];
+                // $menu->hot = $request->hot[$i];
+                $menu->category_id = 2;
+            }else{//食事メニューの時
+                $menu->name = $request->menu_name[$i];
+                // $menu->spice = $request->spice[$i];
+            }
 
-            $drink = new Food();
-            $drink->name = $request->drink_name[$i];
-            $drink->price = $request->drink_price[$i];
-            $drink->description = $request->description[$i];
-            $drink->hot = $request->hot[$i];
-            $drink->content_id = $content->id;
-            $drink->created_at = Carbon::now();
-            $drink->updated_at = Carbon::now();
-            $drink->save();
+            if( $request->tips[$i] == 1 ){
+                $menu->tips = $request->tips[$i];
+            } 
 
+            $menu->price = $request->price[$i];
+            $menu->description = $request->description[$i];
+            
+            $menu->content_id = $content->id;
+            $menu->created_at = Carbon::now();
+            $menu->updated_at = Carbon::now();
+            $menu->save();
             $i++;
         }
-        
+        // $menus = Menu::all();
+        // dd($menus);
         return redirect()->route('contents.index');
     }
 
@@ -142,8 +145,16 @@ class ContentsController extends Controller
         $menus = $content->menus()->get();
         $i=0;
         foreach ($menus as $menu) {
-            $menu->food = $request->food[$i];
-            $menu->drink = $request->drink[$i];
+            
+            if( $request->drink_name ){
+                $menu->name = $request->drink_name[$i];
+                $menu->hot = $request->hot[$i];
+            }else{
+                $menu->name = $request->food_name[$i];
+                $menu->spice = $request->spice[$i];
+            }
+            $menu->price = $request->price[$i];
+            $menu->description = $request->description[$i];
             $menu->updated_at = Carbon::now();
             $menu->save();
             $i++;

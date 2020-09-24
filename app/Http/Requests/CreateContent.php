@@ -27,8 +27,9 @@ class CreateContent extends FormRequest
             'name'=>'required|max:20',
             'catchcopy'=>'required|max:200',
             'recommend'=>'required|max:200',
-            'food'=>'max:20',
-            'drink'=>'max:20',
+            'menu_name'=>'required|max:20',
+            'price'=>'required',
+            'description'=>'max:200',
         ];
     }
 
@@ -38,8 +39,9 @@ class CreateContent extends FormRequest
             'name' => '店舗名',
             'catchcopy' => 'お店紹介文',
             'recommend' => '本日のおすすめ',
-            'food' => 'お食事',
-            'drink' => '飲み物',
+            'menu_name' => '品名',
+            'price' => '金額',
+            'description' => 'おすすめポイント',
         ];
     }
 }
