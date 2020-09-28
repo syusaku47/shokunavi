@@ -69,7 +69,7 @@ class ContentsController extends Controller
 
     public function create(CreateContent $request)
     {
-        // dd($request);
+        dd($request);
         $content = new Content();
         $content->name = $request->name;
         $content->image = 'default.jpg';

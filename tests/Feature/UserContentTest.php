@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Models\Content;
+use App\Models\Shop;
 use App\Models\User;
 use Tests\TestCase;
 
-class UserContentTest extends TestCase
+class UserShopTest extends TestCase
 {
     // テストケースごとにデータベースをリフレッシュしてマイグレーションを再実行する
     use RefreshDatabase;

@@ -7,8 +7,10 @@ use App\Models\Food;
 use Auth;
 use App\Models\Like;
 
-class Content extends Model
+class Shop extends Model
 {
+    
+
     public function foods()
     {
         return $this->hasMany('App\Models\Food');
@@ -16,23 +18,23 @@ class Content extends Model
 
     protected $fillable = ['title', 'body', 'summary', 'user_id'];
 
-    public function comments() {
-      return $this->hasMany('App\Models\Comment');
+    public function comments() 
+    {
+        return $this->hasMany('App\Models\Comment');
     }
 
     public function user()
     {
-      return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function likes()
     {
-      return $this->hasMany('App\Models\Like');
+        return $this->hasMany('App\Models\Like');
     }
 
     public function like_by()
     {
-      return Like::where('user_id', Auth::user()->id)->first();
+        return Like::where('user_id', Auth::user()->id)->first();
     }
 }
-

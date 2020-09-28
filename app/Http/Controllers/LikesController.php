@@ -6,29 +6,29 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Like;
 use Auth;
-use App\Models\Content;
+use App\Models\Shop;
 class LikesController extends Controller
 {
-    public function store(Request $request, $contentId)
+    public function store(Request $request, $shopId)
     {
         Like::create(
         array(
             'user_id' => Auth::user()->id,
-            'content_id' => $contentId
+            'shop_id' => $shopId
             )
         );
 
-        $content = Content::findOrFail($contentId);
+        $shop = Shop::findOrFail($shopId);
 
         return redirect()
-            ->action('ContentsController@user_show', $content->id);
+            ->action('ShopsController@user_show', $shop->id);
     }
 
-    public function destroy($contentId, $likeId) {
-        $content = Content::findOrFail($contentId);
-        $content->like_by()->findOrFail($likeId)->delete();
+    public function destroy($shopId, $likeId) {
+        $shop = Shop::findOrFail($shopId);
+        $shop->like_by()->findOrFail($likeId)->delete();
 
         return redirect()
-            ->action('ContentsController@user_show', $content->id);
+            ->action('ShopsController@user_show', $shop->id);
     }
 }

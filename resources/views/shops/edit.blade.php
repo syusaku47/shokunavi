@@ -5,12 +5,12 @@
 <div class="d-flex align-items-center mb-4">
   <h1>店舗情報編集</h1>
   <div class="ml-auto">
-    <a href=" {{ route('contents.index') }} " class="btn btn-outline-dark">店舗一覧</a>
+    <a href=" {{ route('shops.index') }} " class="btn btn-outline-dark">店舗一覧</a>
   </div>
 </div>
 @if ($errors->any())
               <div class="alert alert danger">
-                <ul >
+                <ul>
                   @foreach ($errors->all() as $error)
                   <li>{{$error}}</li>
                   @endforeach
@@ -18,7 +18,7 @@
               </div>
             @endif
 
-<form action="{{ route('contents.edit', ['id' => $content->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('shops.edit', ['id' => $content->id]) }}" method="POST" enctype="multipart/form-data">
   @csrf
 
   <div class="form-group">
@@ -38,9 +38,9 @@
       <input type="file" name="image">
         <!-- <label for="food">食事,ドリンク</label>
         <label for="drink">ドリンクメニュー</label>
-        @foreach ($menus as $menu)
-          <input type="text" class="form-control mb-4" name="food[]" id="food" value="{{ old('food') ?? $menu->food }}" />
-          <input type="text" class="form-control mb-4" name="drink[]" id="drink" value="{{ old('drink') ?? $menu->drink }}" />
+        @foreach ($foods as $food)
+          <input type="text" class="form-control mb-4" name="food[]" id="food" value="{{ old('food') ?? $food->food }}" />
+          <input type="text" class="form-control mb-4" name="drink[]" id="drink" value="{{ old('drink') ?? $food->drink }}" />
         @endforeach -->
         <!-- 食べ物、ドリンク情報 -->
         <section class="py-5">
@@ -52,15 +52,15 @@
             <div class="tab-content">
               <div id="food-edit" class="tab-pane active">
                 <ul class="my-4">
-                  @foreach ($menus as $menu)
-                  <input type="text" class="form-control mb-4" name="food[]" id="food" value="{{ old('food') ?? $menu->food }}" />
+                  @foreach ($foods as $food)
+                  <input type="text" class="form-control mb-4" name="food[]" id="food" value="{{ old('food') ?? $food->food }}" />
                   @endforeach
                 </ul>
               </div>
               <div id="drink-edit" class="tab-pane">
                 <ul class="my-4">
-                  @foreach ($menus as $menu)
-                  <input type="text" class="form-control mb-4" name="drink[]" id="drink" value="{{ old('drink') ?? $menu->drink }}" />
+                  @foreach ($foods as $food)
+                  <input type="text" class="form-control mb-4" name="drink[]" id="drink" value="{{ old('drink') ?? $food->drink }}" />
                   @endforeach
                 </ul>
               </div>

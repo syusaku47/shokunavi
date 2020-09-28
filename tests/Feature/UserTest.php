@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Models\Content;
+use App\Models\Shop;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -25,7 +25,7 @@ class UserTest extends TestCase
         $response = $this->get('/login')->assertStatus(200);
 
         // ログインしていないので店舗一覧画面にアクセスは失敗する
-        $response = $this->get('contents/user_index')->assertStatus(302);
+        $response = $this->get('shops/user_index')->assertStatus(302);
     }
 
     public function test_user_no_register()

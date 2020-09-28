@@ -20,7 +20,7 @@
                 </ul>
               </div>
             @endif
-              <form action="{{ route('contents.create') }}" method="post">
+              <form action="{{ route('shops.create') }}" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="name">店舗名称（必須）</label>

@@ -8,25 +8,25 @@
           </ul>
           <div class="tab-content">
             <div id="food" class="tab-pane active">
-              @foreach ($menus as $menu)
-                @if( $menu->category_id == 1)
+              @foreach ($foods as $food)
+                @if( $food->category_id == 1)
                   <div class="row border border-dark mb-4">
                     <div class="col-8">
                       <ul class="my-4">
-                        <h4 class="py-2">{{ $menu->name}}
-                        @if( $menu->tips == 1)
+                        <h4 class="py-2">{{ $food->name}}
+                        @if( $food->tips == 1)
                           <span class="material-icons ml-2">thumb_up_alt</span>
                         Good!
                         @endif
                         </h4>
-                        <li class="pt-4">{{ $menu->description}}</li>
+                        <li class="pt-4">{{ $food->description}}</li>
 
                       </ul>
                     </div>
                     <div class="col-4">
                       <ul class="my-4">
-                        <li class=" pt-2">{{ $menu->price}}円</li>
-                        <li class=" pt-4">（税込み{{ $menu->price}}円）</li>
+                        <li class=" pt-2">{{ $food->price}}円</li>
+                        <li class=" pt-4">（税込み{{ $food->price}}円）</li>
                       </ul>
                     </div>
                   </div>
@@ -35,24 +35,24 @@
             </div>
 
             <div id="drink" class="tab-pane">
-              @foreach ($menus as $menu)
-                  @if( $menu->category_id == 2)
+              @foreach ($foods as $food)
+                  @if( $food->category_id == 2)
                     <div class="row border border-dark mb-4">
                       <div class="col-8">
                         <ul class="my-4">
-                          <h4 class="py-2">{{ $menu->name}}
-                          @if( $menu->tips == 1)
+                          <h4 class="py-2">{{ $food->name}}
+                          @if( $food->tips == 1)
                             <span class="material-icons ml-2">thumb_up_alt</span>
                           Good!
                           @endif
                           </h4>
-                          <li class="pt-4">{{ $menu->description}}</li>
+                          <li class="pt-4">{{ $food->description}}</li>
                         </ul>
                       </div>
                       <div class="col-4">
                         <ul class="my-4">
-                          <li class=" pt-2">{{ $menu->price}}円</li>
-                          <li class=" pt-4">（税込み{{ $menu->price}}円）</li>
+                          <li class=" pt-2">{{ $food->price}}円</li>
+                          <li class=" pt-4">（税込み{{ $food->price}}円）</li>
                         </ul>
                       </div>
                     </div>

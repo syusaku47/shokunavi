@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Content;
+use App\Models\Shop;
+use Illuminate\Support\Facades\DB;
 
-class ContentsTableSeeder extends Seeder
+class ShopsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +13,6 @@ class ContentsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Content::class,100)->create();
+        factory(Shop::class,100)->create();
     }
 }

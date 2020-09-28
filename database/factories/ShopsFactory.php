@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Content;
+use App\Models\Shop;
 use Faker\Generator as Faker;
 
-$factory->define(Content::class, function (Faker $faker) {
+$factory->define(Shop::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'catchcopy' => $faker->realText(10),

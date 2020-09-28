@@ -19,7 +19,7 @@
   <nav class="navbar navbar-expand navbar-light container">
     
       @if(Auth::check())
-    <a class="navbar-brand mr-4" href="{{ route('contents.index') }}">食なび</a>
+    <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび</a>
         <span class="navbar-item ">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>

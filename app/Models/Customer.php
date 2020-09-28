@@ -29,8 +29,8 @@ class Customer extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function conents()
+    public function shops()
     {
-        return $this->hasMany('App\Models\Content');
+        return $this->hasMany('App\Models\Shop');
     }
 }

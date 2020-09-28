@@ -10,17 +10,17 @@ class Like extends Model
     use CounterCache;
 
     public $counterCacheOptions = [
-        'Content' => [
+        'Shop' => [
             'field' => 'likes_count',
-            'foreignKey' => 'content_id'
+            'foreignKey' => 'shop_id'
         ]
     ];
 
-    protected $fillable = ['user_id', 'content_id'];
+    protected $fillable = ['user_id', 'shop_id'];
 
-    public function content()
+    public function shop()
     {
-        return $this->belongsTo('App\Models\Content');
+        return $this->belongsTo('App\Models\Shop');
     }
 
     public function User()

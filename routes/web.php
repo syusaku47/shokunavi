@@ -17,14 +17,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //ユーザーログイン後
-Route::group(['prefix' => 'contents', 'middleware' => 'auth'], function() {
-    Route::get('/user_index', 'ContentsController@user_index' ) ->name('contents.user_index');
-    Route::get('/{id}', 'ContentsController@user_show' ) ->name('contents.user_show');
+Route::group(['prefix' => 'shops', 'middleware' => 'auth'], function() {
+    Route::get('/user_index', 'ShopsController@user_index' ) ->name('shops.user_index');
+    Route::get('/{id}', 'ShopsController@user_show' ) ->name('shops.user_show');
     Route::post('/{id}/likes', 'LikesController@store');
     Route::post('/{id}/likes/{like}', 'LikesController@destroy');
 });
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
     Route::get('/edit', 'UsersController@showEditForm' ) ->name('user.edit');
     Route::post('/edit', 'UsersController@edit' );
     Route::get('/edit/password', 'UsersController@showEditPasswordForm' ) ->name('user.edit_password');
@@ -46,13 +46,8 @@ Route::group(['prefix' => 'customer'], function() {
 //Customerログイン後
 Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function() {
     Route::post('/auth/logout',   'Customer\Auth\LoginController@logout')->name('customer.auth.logout');
-    Route::get('home',      'Customer\HomeController@index')->name('customer.home');
-    Route::get('/contents/index', 'ContentsController@index' ) ->name('contents.index');
-    Route::get('/contents/create', 'ContentsController@showCreateForm' ) ->name('contents.create');
-    Route::post('/contents/create', 'ContentsController@create' );
-    Route::get('/contents/{id}', 'ContentsController@show' ) ->name('contents.show');
-    Route::get('/contents/{id}/edit', 'ContentsController@showEditForm' ) ->name('contents.edit');
-    Route::post('/contents/{id}/edit', 'ContentsController@edit' );
-    Route::post('/contents/{id}/destroy', 'ContentsController@destroy' ) ->name('contents.destroy');
+    // Route::get('home',      'Customer\HomeController@index')->name('customer.home');
+    Route::resource('shops', 'ShopsController');
+    Route::resource('foods', 'FoodsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });
 
