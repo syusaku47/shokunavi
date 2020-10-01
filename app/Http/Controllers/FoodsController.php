@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateShop;
 use App\Models\Food;
+use App\Models\Category;
+use App\Models\Shop;
 use Carbon\Carbon;
 use Auth;
 
@@ -25,9 +27,13 @@ class FoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('foods.create');
+        $shop = Shop::find($id);
+        return view('shops.foods.create',[
+            'shop'=>$shop
+        ]
+    );
     }
 
     /**
@@ -36,19 +42,18 @@ class FoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        $shop = Shop::find($id);
+        $i=0;
         foreach ($request->num as $val) {
             $food = new Food();
             
-            //ドリンクの時
-            if( $i >= $f ){
-                $food->name = $request->Food_name[$i];
-                // $food->hot = $request->hot[$i];
+            $food->name = $request->menu_name[$i];
+            if($i>1){
                 $food->category_id = 2;
-            }else{//食事メニューの時
-                $food->name = $request->Food_name[$i];
-                // $food->spice = $request->spice[$i];
+            }else{
+                $food->category_id = 1;
             }
 
             if( $request->tips[$i] == 1 ){
@@ -58,12 +63,16 @@ class FoodsController extends Controller
             $food->price = $request->price[$i];
             $food->description = $request->description[$i];
             
-            $food->content_id = $shop->id;
+            $food->shop_id = $shop->id;
             $food->created_at = Carbon::now();
             $food->updated_at = Carbon::now();
             $food->save();
             $i++;
         }
+
+        return redirect()->route('shops.show',[
+            'shop'=>$shop->id
+        ]);
     }
 
     /**
@@ -84,13 +93,14 @@ class FoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $shop = Shop::find($id);
-        $foods = $shop->foods()->get();
+    {   $shop = Shop::find($id);
 
-        return view('shops/edit',[
+            $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
+            $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
+        return view('shops.foods.edit',[
         'shop' => $shop,
-        'foods' => $foods
+        'foods' => $foods,
+        'drinks' => $drinks,
         ]);
     }
 
@@ -130,8 +140,14 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($shopId,$foodId)
     {
-        //
+
+        $shop = Shop::find($shopId);
+        $food = Food::find($foodId);
+        $food->delete();
+        return redirect()->route('shops.show',[
+        'shop'=> $shop
+            ]);
     }
 }

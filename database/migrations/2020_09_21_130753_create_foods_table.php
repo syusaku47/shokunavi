@@ -21,13 +21,10 @@ class CreateFoodsTable extends Migration
             $table->integer('tips')->default(0);
             $table->integer('hot')->default(0);
             $table->integer('spice')->default(0);
-            $table->integer('category_id')->default(1);
-
+            $table->integer('category_id')->unsigned();
             $table->integer('shop_id')->unsigned();
-
             $table->timestamps();
             $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            // $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

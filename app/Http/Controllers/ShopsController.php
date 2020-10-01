@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
 use App\Models\Shop;
+use App\Models\Category;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\View;
@@ -71,11 +72,16 @@ class ShopsController extends Controller
     public function show($id)
     {
         $shop = Shop::find($id);
-        $foods = $shop->foods()->get();
+        $categorys = Category::all();
+        // $foods = $shop->foods()->get();
+        $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
+        $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
 
         return view('shops/show',[
         'shop' => $shop,
-        'foods' => $foods
+        'foods' => $foods,
+        'drinks' => $drinks,
+        'categorys' => $categorys
         ]);
     }
 

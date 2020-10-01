@@ -48,6 +48,9 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function
     Route::post('/auth/logout',   'Customer\Auth\LoginController@logout')->name('customer.auth.logout');
     // Route::get('home',      'Customer\HomeController@index')->name('customer.home');
     Route::resource('shops', 'ShopsController');
-    Route::resource('foods', 'FoodsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('shops.foods', 'FoodsController',['only' => ['create','store','destroy']]);
+    Route::get('/shops/{shop}/foods/edit','FoodsController@edit')->name('shops.foods.edit');
+    Route::post('/shops/{shop}/foods/update','FoodsController@update')->name('shops.foods.update');
+    
 });
 

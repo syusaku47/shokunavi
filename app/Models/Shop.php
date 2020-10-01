@@ -9,7 +9,6 @@ use App\Models\Like;
 
 class Shop extends Model
 {
-    
 
     public function foods()
     {

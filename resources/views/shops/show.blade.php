@@ -19,25 +19,19 @@
   </div>
 </div>
 
-@include('share.food')
-
   <!-- 削除フォーム -->
   <form method="POST" action="{{ route('shops.destroy',['shop' => $shop->id]) }}">
   @csrf
+  @method('DELETE')
 <div class="text-right">
   <input type="submit" class="btn btn-danger" value="店舗情報削除" data-id="{{ $shop->id }}" onclick="deleteContent(this);">
 </div>
   </form>
-<script>
 
-// ************************************
-// 削除ボタンを押してすぐにレコードが削除されないようにjavascriptで確認メッセージを流します。
-// *************************************
-function deleteContent(e) {
-    'use strict';
-    if (confirm('本当に削除していいですか?')) {
-    document.getElementById('delete_' + e.dataset.id).submit();
-    }
-}
-</script>
+  <a href="{{ route('shops.foods.edit',['shop'=>$shop->id]) }}">メニューの編集</a>
+
+@include('share.food')
+
+@include('share.js')
+
 @endsection
