@@ -1,6 +1,5 @@
   <!-- 食べ物、ドリンク情報 -->
   <section class="py-5">
-        <h2 class="mb-5">メニュー</h2>
         <div class="container">
           <ul class="nav nav-tabs mb-4">
             <li class="nav-item"><a href="#food" class="nav-link active" data-toggle="tab">食べ物</a></li>

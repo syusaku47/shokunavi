@@ -15,7 +15,6 @@ class Shop extends Model
         return $this->hasMany('App\Models\Food');
     }
 
-    protected $fillable = ['title', 'body', 'summary', 'user_id'];
 
     public function comments() 
     {

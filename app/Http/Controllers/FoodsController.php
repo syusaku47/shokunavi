@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateShop;
+use App\Http\Requests\CreateFood;
+use App\Http\Requests\EditFood;
 use App\Models\Food;
 use App\Models\Category;
 use App\Models\Shop;
@@ -42,7 +43,7 @@ class FoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(CreateFood $request, $id)
     {
         $shop = Shop::find($id);
         $i=0;
@@ -111,25 +112,22 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditFood $request, $id)
     {
+        $shop = Shop::find($id);
         $foods = $shop->foods()->get();
         $i=0;
         foreach ($foods as $food) {
             
-            if( $request->drink_name ){
-                $food->name = $request->drink_name[$i];
-                $food->hot = $request->hot[$i];
-            }else{
-                $food->name = $request->food_name[$i];
-                $food->spice = $request->spice[$i];
-            }
+            $food->name = $request->menu_name[$i];
             $food->price = $request->price[$i];
             $food->description = $request->description[$i];
+            $food->tips = $request->tips[$i];
             $food->updated_at = Carbon::now();
             $food->save();
             $i++;
         }
+        dd($errors);
 
         return redirect()->route('shops.index');
     }

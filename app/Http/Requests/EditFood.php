@@ -2,17 +2,14 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditContent extends CreateContent
+class EditFood extends CreateFood
 {
     public function rules()
     {
         $rule = parent::rules();
-        return $rule + [
-            'image'=>'image|file',
-        ];
+        return $rule;
     }
 
     public function attributes()

@@ -8,7 +8,6 @@ use App\Models\Shop;
 use App\Models\Category;
 use Carbon\Carbon;
 use Auth;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -39,7 +38,7 @@ class ShopsController extends Controller
      */
     public function create()
     {
-        return view('shops/create');
+        return view('shops.create');
     }
 
     /**
@@ -48,7 +47,7 @@ class ShopsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateShop $request)
     {
         $shop = new Shop();
         $shop->name = $request->name;
@@ -109,23 +108,27 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditShop $request, $id)
     {
-        if ($file = $request->image) {
-            $fileName = time() . $file->getClientOriginalName();
-            $target_path = public_path('uploads/');
-            $file->move($target_path, $fileName);
-        } else {
-            $fileName = "";
-        }
-
         $shop = Shop::find($id);
         $shop->name = $request->name;
         $shop->catchcopy = $request->catchcopy;
         $shop->recommend = $request->recommend;
-        $shop->image = $fileName;
+        
+        //画像があれば処理
+        if ($file = $request->image) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('uploads/');
+            $file->move($target_path, $fileName);
+            $shop->image = $fileName;
+        }
+
         $shop->updated_at = Carbon::now();
         $shop->save();
+
+        return redirect()->route('shops.show',[
+            'shop' => $shop,
+        ]);
     }
 
     /**
@@ -160,7 +163,7 @@ class ShopsController extends Controller
             //単語をループで回す
             foreach($search_split2 as $value)
             {
-            $query->where('name','like','%'.$value.'%');
+                $query->where('name','like','%'.$value.'%');
             }
         };
         
@@ -178,11 +181,6 @@ class ShopsController extends Controller
         $shop = Shop::findOrFail($id); // findOrFail 見つからなかった時の例外処理
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
         $foods = $shop->foods()->get();
-
         return view('shops.user_show')->with(array('shop' => $shop, 'like' => $like, 'foods'=>$foods));
-            // return view('shops/user_show',[
-            // 'shop' => $shop,
-            // 'foods' => $foods
-            // ]);
     }
 }
