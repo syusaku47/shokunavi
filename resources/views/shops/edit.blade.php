@@ -37,8 +37,18 @@
           <textarea type="text" class="form-control mb-4" name="recommend" id="recommend">{{ old('recommend') ?? $shop->recommend }}</textarea>
         </div>
         <input type="file" name="image">
+
         <div class="text-right">
           <button type="submit" class="btn btn-primary">送信</button>
         </div>
     </form>
+        <!-- 削除フォーム -->
+        <form method="POST" action="{{ route('shops.destroy', ['shop' => $shop->id]) }}" id="form_{{ $shop->id }}">
+          @csrf
+          @method('DELETE')
+          <div class="text-left">
+            <a href="#" type="submit" class="btn btn-danger" data-id="{{ $shop->id }}" onclick="deleteContent(this)">店舗削除</a> 
+          </div>
+        </form>
+    @include('share.js')
   @endsection

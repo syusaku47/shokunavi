@@ -24,18 +24,18 @@ class CreateFood extends FormRequest
     public function rules()
     {
         return [
-            'menu_name'=>'required|max:20',
-            'price'=>'required',
-            'description'=>'max:200',
+            'menu_name.*'=>'required|max:20',
+            'price.*'=>'required',
+            'description.*'=>'max:200',
         ];
     }
 
     public function attributes()
     {
         return [
-            'menu_name' => '品名',
-            'price' => '金額',
-            'description' => 'おすすめポイント',
+            'menu_name.*' => '品名',
+            'price.*' => '金額',
+            'description.*' => 'おすすめポイント',
         ];
     }
 }

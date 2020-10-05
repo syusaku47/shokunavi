@@ -10,12 +10,14 @@
     </div>
   </div>
 
-  <div class="card-columns my-4">
+  <div class="card-deck">
+  <div class="row">
   @foreach ($shops as $shop)
-    <div class="card" style="width:22rem;">
-    <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">
-    <img class="card-img-top" src="/uploads/{{ $shop->image }}" width="200px" height="200px">
-    </a>
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">
+        <img class="card-img-top" src="/uploads/{{ $shop->image }}">
+      </a>
       <div class="card-body">
         <h5 class="card-title">{{ $shop->name }}</h5>
         <h6 class="card-subtitle text-muted">{{ $shop->catchcopy }}</h6>
@@ -24,7 +26,9 @@
         <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">店舗情報をもっと見る</a>
       </div>
     </div>
+    </div>
 @endforeach
+  </div>
   </div>
     {{ $shops->links() }}
   @endsection

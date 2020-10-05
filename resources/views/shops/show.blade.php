@@ -18,14 +18,6 @@
       <p class="card-text">{{ $shop->catchcopy}}</p>
       <p class="card-text">{{ $shop->recommend}}</p>
     </div>
-    <!-- 削除フォーム -->
-    <form method="POST" action="{{ route('shops.destroy',['shop' => $shop->id]) }}">
-      @csrf
-      @method('DELETE')
-      <div class="text-right">
-        <input type="submit" class="btn btn-danger" value="店舗情報削除" data-id="{{ $shop->id }}" onclick="deleteContent(this);">
-      </div>
-    </form>
   </div>
 
   <div class="d-flex align-items-center mt-4 mb-4">

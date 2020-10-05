@@ -127,7 +127,6 @@ class FoodsController extends Controller
             $food->save();
             $i++;
         }
-        dd($errors);
 
         return redirect()->route('shops.index');
     }

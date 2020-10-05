@@ -28,18 +28,18 @@
         @foreach ($foods as $food)
           <div class="form-group row">
             <label for="menu_name" class="col-md-3 col-form-label">{{ __('食べ物（必須）') }}</label>
-            <input type="text" class="form-control col-md-6 mr-auto" name="menu_name[]" id="menu_name" value="{{ old('menu_name') ?? $food->name }}" />
+            <input type="text" class="form-control col-md-6 mr-auto" name="menu_name[]" id="menu_name" value="{{ old('menu_name.*') ?? $food->name }}" />
             {{Form::select('tips[]', ['選択しない','おすすめ'], $food->tips) }}
           </div>
           
           <div class="form-group row">
             <label for="price" class="col-md-3 col-form-label">{{ __('料金（必須）') }}</label>
-            <input type="number" class="form-control col-md-4" name="price[]" id="price" value="{{ old('price') ?? $food->price }}"/>
+            <input type="number" class="form-control col-md-4" name="price[]" id="price" value="{{ old('price.*') ?? $food->price }}"/>
             <span>円(税抜)</span>
           </div>
           <div class="form-group row">
             <label for="description" class="col-md-3 col-form-label">{{ __('おすすめポイント') }}</label>
-            <textarea type="text" class="form-control col-md-9" name="description[]" id="description">{{ old('description') ?? $food->description }}</textarea>
+            <textarea type="text" class="form-control col-md-9" name="description[]" id="description">{{ old('description.*') ?? $food->description }}</textarea>
           </div>
         @endforeach
       </div>
@@ -47,18 +47,18 @@
         @foreach ($drinks as $drink)
           <div class="form-group row">
             <label for="menu_name" class="col-md-3 col-form-label">{{ __('飲み物（必須）') }}</label>
-            <input type="text" class="form-control col-md-6 mr-auto" name="menu_name[]" id="menu_name" value="{{ old('menu_name') ?? $drink->name }}" />
+            <input type="text" class="form-control col-md-6 mr-auto" name="menu_name[]" id="menu_name" value="{{ old('menu_name.*') ?? $drink->name }}" />
             {{Form::select('tips[]', ['選択しない','おすすめ'], $drink->tips)}}
           </div>
           
           <div class="form-group row">
             <label for="price" class="col-md-3 col-form-label">{{ __('料金（必須）') }}</label>
-            <input type="number" class="form-control col-md-4" name="price[]" id="price" value="{{ old('price') ?? $drink->price }}"/>
+            <input type="number" class="form-control col-md-4" name="price[]" id="price" value="{{ old('price.*') ?? $drink->price }}"/>
             <span>円(税抜)</span>
           </div>
           <div class="form-group row">
             <label for="description" class="col-md-3 col-form-label">{{ __('おすすめポイント') }}</label>
-            <textarea type="text" class="form-control col-md-9" name="description[]" id="description"  >{{ old('description') ?? $drink->description }}</textarea>
+            <textarea type="text" class="form-control col-md-9" name="description[]" id="description"  >{{ old('description.*') ?? $drink->description }}</textarea>
           </div>
         @endforeach
       </div>

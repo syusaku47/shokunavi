@@ -13,6 +13,6 @@ class ShopsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Shop::class,100)->create();
+        factory(Shop::class,10)->create();
     }
 }
