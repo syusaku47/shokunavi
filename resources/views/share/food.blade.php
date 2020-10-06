@@ -29,7 +29,7 @@
                     <div class="col-4">
                       <ul>
                         <li class=" my-2">{{ $food->price}}円</li>
-                        <li class=" my-2">（税込み{{ $food->price}}円）</li>
+                        <li class=" my-2">（税込み{{ $food->getTax()}}円）</li>
                       </ul>
                     </div>
                   </div>

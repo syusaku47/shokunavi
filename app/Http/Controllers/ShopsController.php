@@ -8,6 +8,7 @@ use App\Models\Shop;
 use App\Models\Category;
 use Carbon\Carbon;
 use Auth;
+use App\Services\ShopFormData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -71,8 +72,6 @@ class ShopsController extends Controller
     public function show($id)
     {
         $shop = Shop::find($id);
-        $categorys = Category::all();
-        // $foods = $shop->foods()->get();
         $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
 
@@ -80,7 +79,6 @@ class ShopsController extends Controller
         'shop' => $shop,
         'foods' => $foods,
         'drinks' => $drinks,
-        'categorys' => $categorys
         ]);
     }
 
@@ -114,15 +112,7 @@ class ShopsController extends Controller
         $shop->name = $request->name;
         $shop->catchcopy = $request->catchcopy;
         $shop->recommend = $request->recommend;
-        
-        //画像があれば処理
-        if ($file = $request->image) {
-            $fileName = time() . $file->getClientOriginalName();
-            $target_path = public_path('uploads/');
-            $file->move($target_path, $fileName);
-            $shop->image = $fileName;
-        }
-
+        $shop->image = ShopFormData::createImage($request);
         $shop->updated_at = Carbon::now();
         $shop->save();
 
@@ -148,28 +138,7 @@ class ShopsController extends Controller
     //閲覧ユーザーコントローラー
     public function user_index(Request $request)
     {
-        $search = $request->input('search');
-
-        // 検索フォーム
-        $query = DB::table('shops');
-
-        if($search !== null){//もしキーワードがあったら
-            //全角スペースを半角に
-            $search_split = mb_convert_kana($search,'s');
-
-            //空白で区切る
-            $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
-
-            //単語をループで回す
-            foreach($search_split2 as $value)
-            {
-                $query->where('name','like','%'.$value.'%');
-            }
-        };
-        
-        $query->select('id','name','catchcopy','recommend','image','updated_at');
-        $query->orderBy('updated_at', 'desc');
-        $shops = $query->paginate(20);
+        $shops = ShopFormData::search($request);
 
         return view('shops/user_index', [
             'shops' => $shops,
@@ -180,7 +149,9 @@ class ShopsController extends Controller
     {
         $shop = Shop::findOrFail($id); // findOrFail 見つからなかった時の例外処理
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
-        $foods = $shop->foods()->get();
-        return view('shops.user_show')->with(array('shop' => $shop, 'like' => $like, 'foods'=>$foods));
+        $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
+        $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
+        return view('shops.user_show')
+        ->with(array('shop' => $shop, 'like' => $like, 'foods'=>$foods ,'drinks'=>$drinks));
     }
 }

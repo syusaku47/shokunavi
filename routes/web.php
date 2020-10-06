@@ -10,11 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
-
-
-//ユーザー認証不要
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(); //ユーザーログイン
 
 //ユーザーログイン後
 Route::group(['prefix' => 'shops', 'middleware' => 'auth'], function() {
@@ -22,14 +18,13 @@ Route::group(['prefix' => 'shops', 'middleware' => 'auth'], function() {
     Route::get('/{id}', 'ShopsController@user_show' ) ->name('shops.user_show');
     Route::post('/{id}/likes', 'LikesController@store');
     Route::post('/{id}/likes/{like}', 'LikesController@destroy');
-});
 
-Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
+    //ユーザー情報
     Route::get('/edit', 'UsersController@showEditForm' ) ->name('user.edit');
     Route::post('/edit', 'UsersController@edit' );
     Route::get('/edit/password', 'UsersController@showEditPasswordForm' ) ->name('user.edit_password');
     Route::post('/edit/password', 'UsersController@editPassword' );
-    Route::post('/destroy', 'UsersController@showEditForm' ) ->name('user.destroy');
+    Route::post('/destroy', 'UsersController@destroy' ) ->name('user.destroy');
 });
 
 
@@ -46,11 +41,17 @@ Route::group(['prefix' => 'customer'], function() {
 //Customerログイン後
 Route::group(['prefix' => 'customer', 'middleware' => 'auth:customer'], function() {
     Route::post('/auth/logout',   'Customer\Auth\LoginController@logout')->name('customer.auth.logout');
-    // Route::get('home',      'Customer\HomeController@index')->name('customer.home');
     Route::resource('shops', 'ShopsController');
     Route::resource('shops.foods', 'FoodsController',['only' => ['create','store','destroy']]);
     Route::get('/shops/{shop}/foods/edit','FoodsController@edit')->name('shops.foods.edit');
     Route::post('/shops/{shop}/foods/update','FoodsController@update')->name('shops.foods.update');
     
+    //Customer情報編集
+    Route::get('/info','CustomersController@info')->name('customers.info');
+    Route::get('/edit', 'CustomersController@showEditForm' ) ->name('customers.edit');
+    Route::post('/edit', 'CustomersController@edit' );
+    Route::get('/edit/password', 'CustomersController@showEditPasswordForm') ->name('customers.edit_password');
+    Route::post('/edit/password', 'CustomersController@editPassword' );
+    Route::post('/destroy', 'CustomersController@destroy' ) ->name('customers.destroy');
 });
 

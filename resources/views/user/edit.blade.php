@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">ユーザー情報</div>
-                <h1>編集ページ</h1>
+                <div class="card-header">ユーザー情報編集</div>
                     @if ($errors->any())
                         <div class="alert alert danger">
                             <ul >
@@ -54,6 +53,10 @@
                         <a  href="{{ route('user.edit_password') }}">パスワード変更はこちら</a>
                     </div>
                 </div>
+
+
+
+                
             </div>
         </div>
     </div>
