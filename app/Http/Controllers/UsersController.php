@@ -10,37 +10,40 @@ use App\Http\Requests\EditPassword;
 class UsersController extends Controller
 {
 
-    public function showEditForm(){
+    public function showEditForm(User $user){
 
-        $auth = Auth::user();
         return view('users/edit',[ 
-        'auth' => $auth,
+        'user' => $user,
         ]);
     } 
 
-    public function edit(EditUser $request){
+    public function edit(EditUser $request, User $user){
 
-        $auth = Auth::user();
-        $auth->name = $request->name;
-        $auth->email = $request->email;
-        $auth->save();
-        return redirect()->back()->with('update_info_success', 'ユーザー情報を変更しました。');
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->route('users.show',$user->id)->with('update_info_success', 'ユーザー情報を変更しました。');
     } 
 
-    public function showEditPasswordForm(){
+    public function show(User $user){
 
-        $auth = Auth::user();
+        return view('users.show',[ 
+        'user' => $user,
+        ]);
+    } 
+
+    public function showEditPasswordForm(User $user){
+
         return view('users.edit_password',[ 
-        'auth' => $auth,
+        'user' => $user,
         ]);
     } 
 
-    public function editPassword(EditPassword $request){
+    public function editPassword(EditPassword $request, User $user){
 
-        $auth = Auth::user();
-        $auth->password = bcrypt($request->get('new-password'));
-        $auth->save();
-        return redirect()->back()->with('update_password_success', 'ユーザー情報を変更しました。');
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+        return redirect()->route('users.show',$user->id)->with('update_password_success', 'パスワードを変更しました。');
     } 
 
 
@@ -48,9 +51,9 @@ class UsersController extends Controller
 
         if ($user == Auth::user()){
             $user->delete();
+            dd($user);
             return redirect()->route('logout');
         }
-        
-        return redirect()->back()->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
+        // return redirect()->back()->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
     } 
 }

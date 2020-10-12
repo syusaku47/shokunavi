@@ -36,19 +36,19 @@
                     @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.edit') }}">
+                    <form method="POST" action="{{ route('users.edit',['user' => $user->id]) }}">
                         @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control mb-4" name="name" value="{{ old('name') ?? $auth->name }}" />
+                                <input type="text" class="form-control mb-4" name="name" value="{{ old('name') ?? $user->name }}" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }} </label>
                             <div class="col-md-6">
-                                <input type="email" class="form-control"  name="email" value="{{ old('email') ?? $auth->email }}" />
+                                <input type="email" class="form-control"  name="email" value="{{ old('email') ?? $user->email }}" />
                             </div>
                         </div>
 
@@ -60,13 +60,10 @@
                             </div>
                         </div>
                     </form>
-                    <div class="text-md-right">
-                        <a  href="{{ route('users.edit_password') }}">パスワード変更はこちら</a>
-                    </div>
                 </div>
-                <form method="POST" id="form_{{ $auth->id }}" action="{{ route('users.destroy',['user' => $auth->id]) }}" >
+                <form method="DELETE" id="form_{{ $user->id }}" action="{{ route('users.destroy',['user' => $user->id]) }}" >
                     @csrf
-                        <li><a href="#" data-id="{{ $auth->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a></li>
+                        <li><a href="#" data-id="{{ $user->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a></li>
                 </form>
                 @include('share.js')
 

@@ -4,10 +4,11 @@ Auth::routes(); //ユーザーログイン前
 
 //ユーザーログイン後
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
-    Route::get('/edit', 'UsersController@showEditForm' ) ->name('users.edit');
-    Route::post('/edit', 'UsersController@edit' );
-    Route::get('/edit/password', 'UsersController@showEditPasswordForm' ) ->name('users.edit_password');
-    Route::post('/edit/password', 'UsersController@editPassword' );
+    Route::get('/{user}/edit', 'UsersController@showEditForm' ) ->name('users.edit');
+    Route::post('/{user}/edit', 'UsersController@edit' );
+    Route::get('/{user}/edit/password', 'UsersController@showEditPasswordForm' ) ->name('users.edit_password');
+    Route::post('/{user}/edit/password', 'UsersController@editPassword' );
+    Route::get('/{user}', 'UsersController@show' ) ->name('users.show');
     Route::post('/{user}', 'UsersController@destroy' ) ->name('users.destroy');
     
     Route::group(['prefix' => 'shops'], function() {

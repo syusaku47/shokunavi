@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request)
     {
-        return redirect(route('login'));
+        $this->post('logout', 'Auth\LoginController@logout')->name('logout');
     }
 
 

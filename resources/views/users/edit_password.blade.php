@@ -19,16 +19,8 @@
                         </div>
                     @endif
 
-                    @if (session('update_password_success'))
-                <div class="container mt-2">
-                    <div class="alert alert-success">
-                        {{session('update_password_success')}}
-                    </div>
-                </div>
-                @endif
-
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.edit_password') }}">
+                    <form method="POST" action="{{ route('users.edit_password',['user' => $user->id]) }}">
                         @csrf
 
                         <div class="form-group row">
