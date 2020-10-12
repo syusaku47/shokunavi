@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => $exception->getMessage()], 401);
         }
         if (in_array('customer', $exception->guards())) {
-            return redirect()->guest(route('customer.auth.login'));
+            return redirect()->guest(route('customers.auth.login'));
         }
         return redirect()->guest(route('login'));
     }

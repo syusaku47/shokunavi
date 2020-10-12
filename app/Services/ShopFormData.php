@@ -8,12 +8,10 @@ class ShopFormData
 {
     public static function createImage($data){
         //画像があれば処理
-        if ($file = $data->image) {
-            $fileName = time() . $file->getClientOriginalName();
-            $target_path = public_path('uploads/');
-            $file->move($target_path, $fileName);
-            return $fileName;
-        }
+        $fileName = time() . $file->getClientOriginalName();
+        $target_path = public_path('uploads/');
+        $file->move($target_path, $fileName);
+        return $fileName;
     }
 
     public static function search($data){

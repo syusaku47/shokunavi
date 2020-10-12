@@ -13,7 +13,7 @@ class UsersController extends Controller
     public function showEditForm(){
 
         $auth = Auth::user();
-        return view('user/edit',[ 
+        return view('users/edit',[ 
         'auth' => $auth,
         ]);
     } 
@@ -30,7 +30,7 @@ class UsersController extends Controller
     public function showEditPasswordForm(){
 
         $auth = Auth::user();
-        return view('user.edit_password',[ 
+        return view('users.edit_password',[ 
         'auth' => $auth,
         ]);
     } 
@@ -44,11 +44,13 @@ class UsersController extends Controller
     } 
 
 
-    public function destory(){
+    public function destroy(User $user){
 
-        $auth = Auth::user();
+        if ($user == Auth::user()){
+            $user->delete();
+            return redirect()->route('logout');
+        }
         
-        $auth->destory();
-        return redirect()->route('logout');
+        return redirect()->back()->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
     } 
 }

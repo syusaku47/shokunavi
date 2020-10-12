@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check() && $guard === 'user') {
             return redirect('/login');
         } elseif (Auth::guard($guard)->check() && $guard === 'customer') {
-            return redirect('/customer/login');
+            return redirect('/customers/login');
         }
 
         return $next($request);

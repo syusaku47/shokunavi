@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'shops/user_index';
+    protected $redirectTo = 'users/shops/user_index';
 
     /**
      * Create a new controller instance.
@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('customer.auth.login');  //変更
+        return view('customers.auth.login');  //変更
     }
  
     protected function guard()
@@ -56,11 +56,11 @@ class LoginController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
  
-        return redirect('/customer/login');  //変更
+        return redirect('/customers/login');  //変更
     }
 
     protected function loggedOut(Request $request)
     {
-        return redirect(route('/customer/login'));
+        return redirect(route('/customers/login'));
     }
 }

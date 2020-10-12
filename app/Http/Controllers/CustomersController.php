@@ -11,7 +11,7 @@ class CustomersController extends Controller
     public function info()
     {
         $customer = Auth::guard('customer')->user();
-        return view('customer/info',[ 
+        return view('customers/info',[ 
         'customer' => $customer,
         ]);
     }
@@ -25,14 +25,14 @@ class CustomersController extends Controller
     public function showEditForm()
     {
         $customer = Auth::guard('customer')->user();
-        return view('customer/edit',[ 
+        return view('customers/edit',[ 
         'customer' => $customer,
         ]);
     }
     public function editPassword()
     {
         $customer = Auth::guard('customer')->user();
-        return view('customer/edit',[ 
+        return view('customers/edit',[ 
         'customer' => $customer,
         ]);
     }
@@ -62,6 +62,6 @@ class CustomersController extends Controller
      */
     public function destroy()
     {
-        //
+        
     }
 }

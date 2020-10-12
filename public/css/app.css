@@ -8,6 +8,14 @@ body {
   font-size: 14px;
 }
 
+.good{
+  color:red;
+}
+
+.material-icons{
+  color:red;
+}
+
 /* モーダル設定 */
 
 #open, #close {

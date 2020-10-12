@@ -16,7 +16,6 @@ class UserTest extends TestCase
         parent::setUp();
         // テストケース実行前にコンテンツデータを作成する
         $this->seed('UsersTableSeeder');
-
     }
 
     public function test_user_no_login()
@@ -25,7 +24,7 @@ class UserTest extends TestCase
         $response = $this->get('/login')->assertStatus(200);
 
         // ログインしていないので店舗一覧画面にアクセスは失敗する
-        $response = $this->get('shops/user_index')->assertStatus(302);
+        $response = $this->get('users/shops/user_index')->assertStatus(302);
     }
 
     public function test_user_no_register()

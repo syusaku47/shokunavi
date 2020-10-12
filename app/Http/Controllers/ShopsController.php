@@ -27,7 +27,7 @@ class ShopsController extends Controller
         ->orderBy('updated_at','desc')
         ->paginate(20);
     
-        return view('shops/index', [
+        return view('shops.index', [
             'shops' => $shops,
         ]);
     }
@@ -69,9 +69,8 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Shop $shop)
     {
-        $shop = Shop::find($id);
         $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
 
@@ -88,12 +87,11 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Shop $shop)
     {
-        $shop = Shop::find($id);
         $foods = $shop->foods()->get();
 
-        return view('shops/edit',[
+        return view('shops.edit',[
         'shop' => $shop,
         'foods' => $foods
         ]);
@@ -112,7 +110,9 @@ class ShopsController extends Controller
         $shop->name = $request->name;
         $shop->catchcopy = $request->catchcopy;
         $shop->recommend = $request->recommend;
-        $shop->image = ShopFormData::createImage($request);
+        if ($file = $request->image) {
+            $shop->image = ShopFormData::createImage($request);
+        }
         $shop->updated_at = Carbon::now();
         $shop->save();
 
@@ -127,9 +127,8 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Shop $shop)
     {
-        $shop = Shop::find($id);
         $shop->delete();
         return redirect()->route('shops.index');
     }
@@ -140,14 +139,13 @@ class ShopsController extends Controller
     {
         $shops = ShopFormData::search($request);
 
-        return view('shops/user_index', [
+        return view('shops.user_index', [
             'shops' => $shops,
         ]);
     }
 
-    public function user_show(int $id)
+    public function user_show(Shop $shop)
     {
-        $shop = Shop::findOrFail($id); // findOrFail 見つからなかった時の例外処理
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
         $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得

@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    <div class="text-right">
+    <a href="{{ route('shops.user_index') }}" class="btn btn-outline-dark">Topへ戻る</a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -25,7 +28,7 @@
                 @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.edit_password') }}">
+                    <form method="POST" action="{{ route('users.edit_password') }}">
                         @csrf
 
                         <div class="form-group row">

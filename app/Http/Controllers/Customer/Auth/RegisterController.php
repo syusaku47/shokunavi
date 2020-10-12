@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/customer/index';
+    protected $redirectTo = '/customers/index';
 
     /**
      * Create a new controller instance.
@@ -50,7 +50,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('customer.auth.register');
+        return view('customers.auth.register');
     }
 
     /**

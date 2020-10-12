@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+<div class="text-right">
+    <a href="{{ route('shops.user_index') }}" class="btn btn-outline-dark">Topへ戻る</a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -17,15 +20,23 @@
                     @endif
 
                     @if (session('update_info_success'))
-                <div class="container mt-2">
-                    <div class="alert alert-success">
-                        {{session('update_info_success')}}
-                    </div>
-                </div>
-                @endif
+                        <div class="container mt-2">
+                            <div class="alert alert-success">
+                                {{session('update_info_success')}}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if (session('delete_user_failed'))
+                        <div class="container mt-2">
+                            <div class="alert alert-success">
+                                {{session('delete_user_failed')}}
+                            </div>
+                        </div>
+                    @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.edit') }}">
+                    <form method="POST" action="{{ route('users.edit') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -50,13 +61,15 @@
                         </div>
                     </form>
                     <div class="text-md-right">
-                        <a  href="{{ route('user.edit_password') }}">パスワード変更はこちら</a>
+                        <a  href="{{ route('users.edit_password') }}">パスワード変更はこちら</a>
                     </div>
                 </div>
+                <form method="POST" id="form_{{ $auth->id }}" action="{{ route('users.destroy',['user' => $auth->id]) }}" >
+                    @csrf
+                        <li><a href="#" data-id="{{ $auth->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a></li>
+                </form>
+                @include('share.js')
 
-
-
-                
             </div>
         </div>
     </div>

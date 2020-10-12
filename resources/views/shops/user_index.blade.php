@@ -7,6 +7,8 @@
     
   <div>
     <p>お店の名前で検索してください</p>
+    <p>お店の名前で検索してください</p>
+    <p>お店の名前で検索してください</p>
     <form method="GET" action="{{ route('shops.user_index') }}" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" name="search" type="search" placeholder="検索" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索する</button>
@@ -19,14 +21,14 @@
       @foreach ($shops as $shop)
         <div class="col-md-6 mb-4">
           <div class="card h-100">
-            <a href="{{ route('shops.user_show', ['id'=>$shop->id]) }}" class="card-link">
+            <a href="{{ route('shops.user_show', ['shop'=>$shop->id]) }}" class="card-link">
               <img class="card-img-top" src="/uploads/{{ $shop->image }}">
             </a>
             <div class="card-body">
               <h5 class="card-title">{{ $shop->name }}</h5>
               <h6 class="card-subtitle text-muted">{{ $shop->catchcopy }}</h6>
               <p class="card-text">おすすめ：{{ $shop->recommend }}</p>
-              <a href="{{ route('shops.user_show', ['id'=>$shop->id]) }}" class="card-link">店舗情報をもっと見る</a>
+              <a href="{{ route('shops.user_show', ['shop'=>$shop->id]) }}" class="card-link">店舗情報をもっと見る</a>
             </div>
           </div>
         </div>

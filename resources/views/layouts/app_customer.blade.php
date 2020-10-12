@@ -41,11 +41,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.auth.login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('customers.auth.login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('customer.auth.register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('customers.auth.register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -55,13 +55,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('customer.auth.logout') }}"
+                                    <a class="dropdown-item" href="{{ route('customers.auth.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('customer.auth.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('customers.auth.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

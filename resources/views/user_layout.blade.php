@@ -20,14 +20,14 @@
     
       @if(Auth::check())
     <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび</a>
-        <span class="navbar-item "><a href="{{ route('user.edit') }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
+        <span class="navbar-item "><a href="{{ route('users.edit') }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-      <a class="navbar-brand mr-4" href="{{ route('contents.user_index') }}">食なび</a>
+      <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび</a>
         <a class="navbar-item" href="{{ route('login') }}">ログイン</a>
         ｜
         <a class="navbar-item" href="{{ route('register') }}">会員登録</a>
@@ -52,6 +52,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
+  <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

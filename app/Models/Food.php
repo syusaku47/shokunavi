@@ -16,6 +16,6 @@ class Food extends Model
 
     public function getTax()
     {
-        return $this->price*1.08;
+        return $this->price*1.1;
     }
 }
