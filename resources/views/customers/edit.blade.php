@@ -6,26 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">ユーザー情報編集</div>
-                    @if ($errors->any())
-                        <div class="alert alert danger">
-                            <ul >
-                            @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if (session('update_info_success'))
-                <div class="container mt-2">
-                    <div class="alert alert-success">
-                        {{session('update_info_success')}}
-                    </div>
-                </div>
-                @endif
+                @include('share.error')
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customers.edit') }}">
+                    <form method="POST" action="{{ route('customers.edit', ['customer' => $customer->id]) }}">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>
@@ -48,14 +32,15 @@
                             </div>
                         </div>
                     </form>
-                    <div class="text-md-right">
-                        <a  href="{{ route('customers.edit_password') }}">パスワード変更はこちら</a>
-                    </div>
+                    <form method="POST" action="{{ route('customers.destroy',['customer' => $customer->id]) }}" id="form_{{ $customer->id }}">
+                        @csrf
+                        @method('POST')
+                            <li>
+                                <a href="#" data-id="{{ $customer->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a>
+                            </li>
+                    </form>
+                    @include('share.js')
                 </div>
-
-
-
-                
             </div>
         </div>
     </div>

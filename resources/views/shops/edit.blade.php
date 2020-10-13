@@ -7,16 +7,7 @@
         <a href=" {{ route('shops.index') }} " class="btn btn-outline-dark">店舗一覧</a>
       </div>
     </div>
-
-    @if ($errors->any())
-      <div class="alert alert danger p-0">
-        <ul class="px-0">
-          @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-          @endforeach
-        </ul>
-      </div>
-    @endif
+    @include('share.error')
 
     <form action="{{ route('shops.update', ['shop' => $shop->id]) }}" method="POST" enctype="multipart/form-data">
       @csrf

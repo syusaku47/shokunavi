@@ -8,7 +8,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
     Route::post('/{user}/edit', 'UsersController@edit' );
     Route::get('/{user}/edit/password', 'UsersController@showEditPasswordForm' ) ->name('users.edit_password');
     Route::post('/{user}/edit/password', 'UsersController@editPassword' );
-    Route::get('/{user}', 'UsersController@show' ) ->name('users.show');
+    Route::get('/{user}', 'UsersController@info' ) ->name('users.info');
     Route::post('/{user}', 'UsersController@destroy' ) ->name('users.destroy');
     
     Route::group(['prefix' => 'shops'], function() {
@@ -41,11 +41,11 @@ Route::group(['prefix' => 'customers', 'middleware' => 'auth:customer'], functio
     });
 
     //Customer情報編集
-    Route::get('/info','CustomersController@info')->name('customers.info');
-    Route::get('/edit', 'CustomersController@showEditForm' ) ->name('customers.edit');
-    Route::post('/edit', 'CustomersController@edit' );
-    Route::get('/edit/password', 'CustomersController@showEditPasswordForm') ->name('customers.edit_password');
-    Route::post('/edit/password', 'CustomersController@editPassword' );
-    Route::post('/destroy', 'CustomersController@destroy' ) ->name('customers.destroy');
+    Route::get('/{customer}/info','CustomersController@info')->name('customers.info');
+    Route::get('/{customer}/edit', 'CustomersController@showEditForm' ) ->name('customers.edit');
+    Route::post('/{customer}/edit', 'CustomersController@edit' );
+    Route::get('/{customer}/edit/password', 'CustomersController@showEditPasswordForm') ->name('customers.edit_password');
+    Route::post('/{customer}/edit/password', 'CustomersController@editPassword' );
+    Route::post('/{customer}/destroy', 'CustomersController@destroy' ) ->name('customers.destroy');
 });
 

@@ -11,15 +11,7 @@
       <div class="col col-md-offset-3 col-md-9">
         <nav class="panel panel-default">
             <div class="panel-body">
-            @if ($errors->any())
-              <div class="alert alert danger">
-                <ul >
-                  @foreach ($errors->all() as $error)
-                  <li>{{$error}}</li>
-                  @endforeach
-                </ul>
-              </div>
-            @endif
+            @include('share.error')
               <form action="{{ route('shops.foods.store',['shop'=>$shop->id]) }}" method="post">
                 @csrf
                   

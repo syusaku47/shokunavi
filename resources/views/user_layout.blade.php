@@ -20,7 +20,7 @@
     
       @if(Auth::check())
     <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび</a>
-        <span class="navbar-item "><a href="{{ route('users.show', Auth::user()->id) }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
+        <span class="navbar-item "><a href="{{ route('users.info', Auth::user()->id) }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

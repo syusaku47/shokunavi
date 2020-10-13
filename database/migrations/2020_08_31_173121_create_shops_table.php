@@ -22,7 +22,8 @@ class CreateShopsTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade'); // customerが削除されたとき、それに関連するshopも一気に削除される;
+
         });
     }
 

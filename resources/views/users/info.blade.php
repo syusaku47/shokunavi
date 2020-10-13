@@ -17,22 +17,8 @@
                     </div>
                 </div>
 
-                    @if (session('update_info_success'))
-                        <div class="container mt-2">
-                            <div class="alert alert-success">
-                                {{session('update_info_success')}}
-                            </div>
-                        </div>
-                    @endif
-
-                    @if (session('update_password_success'))
-                        <div class="container mt-2">
-                            <div class="alert alert-success">
-                                {{session('update_password_success')}}
-                            </div>
-                        </div>
-                    @endif
-
+                @include('share.message')
+                
                 <div class="card-body">
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>

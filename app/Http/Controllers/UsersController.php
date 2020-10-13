@@ -12,7 +12,7 @@ class UsersController extends Controller
 
     public function showEditForm(User $user){
 
-        return view('users/edit',[ 
+        return view('users.edit',[ 
         'user' => $user,
         ]);
     } 
@@ -22,12 +22,14 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return redirect()->route('users.show',$user->id)->with('update_info_success', 'ユーザー情報を変更しました。');
+        return redirect()->route('users.info',[
+        'user'=>$user->id
+        ])->with('update_info_success', 'ユーザー情報を変更しました。');
     } 
 
-    public function show(User $user){
+    public function info(User $user){
 
-        return view('users.show',[ 
+        return view('users.info',[ 
         'user' => $user,
         ]);
     } 
@@ -43,17 +45,21 @@ class UsersController extends Controller
 
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
-        return redirect()->route('users.show',$user->id)->with('update_password_success', 'パスワードを変更しました。');
+
+        return redirect()
+        ->route('users.info',['user' => $user->id])
+        ->with('update_password_success', 'パスワードを変更しました。');
     } 
 
 
     public function destroy(User $user){
-
         if ($user == Auth::user()){
+            Auth::logout();
             $user->delete();
-            dd($user);
-            return redirect()->route('logout');
+            return redirect()->route('login');
         }
-        // return redirect()->back()->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
+        return redirect()
+        ->back()
+        ->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
     } 
 }

@@ -18,6 +18,14 @@ class CustomersTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
+
+            DB::table('customers')->insert([
+                'name' => 'saori',
+                'email' => 'saori@email.com',
+                'password' => bcrypt('test1234'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
     
     }
 }

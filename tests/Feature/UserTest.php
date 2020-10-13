@@ -29,7 +29,42 @@ class UserTest extends TestCase
 
     public function test_user_no_register()
     {
+        $user = User::find(1);
+
         // ログイン画面にいけるか
         $response = $this->get('/register')->assertStatus(200);
+        // $response = $this->post('/register',[
+        //     'name' => 'sato',
+        //     'email' => 'sato@gmail.com',
+        //     'password' => 'satoDaiki',
+        //     'remember' => 'satoDaiki',
+        // ])->assertRedirect('users/shops/user_index');
+    }
+
+    public function test_user_access()
+    {
+        // $this->withoutExceptionHandling();
+
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)->get(route('users.show',[
+            'user' => $user->id
+        ]))->assertStatus(200);
+        
+        $response = $this->get(route('users.edit',[
+            'user' => $user->id
+        ]))->assertStatus(200);
+        
+        $response = $this->get(route('users.edit_password',[
+            'user' => $user->id
+            ]))->assertStatus(200);
+
+        $response = $this->post(route('users.destroy',[
+            'user' => $user->id
+            ]))->assertStatus(200);
+
+        $response = $this->get(route('users.edit',[
+            'user' => 1000
+        ]))->assertStatus(404);
     }
 }

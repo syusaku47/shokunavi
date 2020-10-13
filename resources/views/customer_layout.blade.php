@@ -20,7 +20,7 @@
     
       @if(Auth::guard('customer')->check())
     <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび</a>
-        <span class="navbar-item "> <a href="{{ route('customers.info') }}">ようこそ, {{ Auth::guard('customer')->user()->name }}さん</a></span>
+        <span class="navbar-item "> <a href="{{ route('customers.info',['customer' => Auth::guard('customer')->user()->id]) }}">ようこそ, {{ Auth::guard('customer')->user()->name }}さん</a></span>
         ｜
         <a href="#" id="logout" class="navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('customers.auth.logout') }}" method="POST" style="display: none;">

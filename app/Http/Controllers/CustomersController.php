@@ -3,65 +3,63 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
 use Auth;
 
 class CustomersController extends Controller
 {
 
-    public function info()
+    public function info(Customer $customer)
     {
-        $customer = Auth::guard('customer')->user();
-        return view('customers/info',[ 
+        return view('customers.info',[ 
         'customer' => $customer,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showEditForm()
+    public function showEditForm(Customer $customer)
     {
-        $customer = Auth::guard('customer')->user();
-        return view('customers/edit',[ 
-        'customer' => $customer,
-        ]);
-    }
-    public function editPassword()
-    {
-        $customer = Auth::guard('customer')->user();
-        return view('customers/edit',[ 
+        return view('customers.edit',[ 
         'customer' => $customer,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
+    public function edit(Request $request,Customer $customer)
     {
-        $customer = Auth::guard('customer')->user();
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->save();
 
-        return redirect()->route('customers.info');
+        return redirect()
+        ->route('customers.info',['customer' => $customer->id])
+        ->with('update_info_success', 'ユーザー情報を変更しました。');;
+    }
+    
+    public function showEditPasswordForm(Customer $customer)
+    {
+        return view('customers.edit_password',[ 
+            'customer' => $customer,
+            ]);
+    }
+        
+
+    public function editPassword(Request $request,Customer $customer)
+    {
+        $customer->password = bcrypt($request->get('new-password'));
+        $customer->save();
+        return redirect()
+        ->route('customers.info',[ 'customer' => $customer,])
+        ->with('update_password_success', 'パスワードを変更しました。');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
+    public function destroy(Customer $customer)
     {
-        
-    }
+        if ($customer == Auth::guard('customer')->user()){
+            Auth::guard('customer')->logout();
+            $customer->delete();
+            return redirect()->route('customers.auth.login');
+        }
+        return redirect()
+        ->back()
+        ->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
+    } 
 }

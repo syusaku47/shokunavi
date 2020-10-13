@@ -1,4 +1,4 @@
-@extends('user_layout')
+@extends('customer_layout')
 
 @section('content')
 <div class="container">
@@ -9,31 +9,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">ユーザー情報編集</div>
-                    @if ($errors->any())
-                        <div class="alert alert danger">
-                            <ul >
-                            @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if (session('update_info_success'))
-                        <div class="container mt-2">
-                            <div class="alert alert-success">
-                                {{session('update_info_success')}}
-                            </div>
-                        </div>
-                    @endif
-
-                    @if (session('delete_user_failed'))
-                        <div class="container mt-2">
-                            <div class="alert alert-success">
-                                {{session('delete_user_failed')}}
-                            </div>
-                        </div>
-                    @endif
+                @include('share.error')
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('users.edit',['user' => $user->id]) }}">
@@ -61,9 +37,12 @@
                         </div>
                     </form>
                 </div>
-                <form method="DELETE" id="form_{{ $user->id }}" action="{{ route('users.destroy',['user' => $user->id]) }}" >
+                <form method="POST" action="{{ route('users.destroy',['user' => $user->id]) }}" id="form_{{ $user->id }}">
                     @csrf
-                        <li><a href="#" data-id="{{ $user->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a></li>
+                    @method('POST')
+                        <li>
+                            <a href="#" data-id="{{ $user->id }}" type="submit" onclick="deleteContent(this);">退会したい場合はこちら</a>
+                        </li>
                 </form>
                 @include('share.js')
 

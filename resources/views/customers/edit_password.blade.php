@@ -1,4 +1,4 @@
-@extends('user_layout')
+@extends('customer_layout')
 
 @section('content')
 <div class="container">
@@ -6,26 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">ユーザー情報編集</div>
-                    @if ($errors->any())
-                        <div class="alert alert danger">
-                            <ul >
-                            @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if (session('update_password_success'))
-                <div class="container mt-2">
-                    <div class="alert alert-success">
-                        {{session('update_password_success')}}
-                    </div>
-                </div>
-                @endif
+                @include('share.error')
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.edit_password') }}">
+                    <form method="POST" action="{{ route('customers.edit_password', ['customer' => $customer->id]) }}">
                         @csrf
 
                         <div class="form-group row">

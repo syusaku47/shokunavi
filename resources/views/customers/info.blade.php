@@ -6,24 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">顧客情報編集</div>
-                    @if ($errors->any())
-                        <div class="alert alert danger">
-                            <ul >
-                            @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
 
-                    @if (session('update_info_success'))
-                <div class="container mt-2">
-                    <div class="alert alert-success">
-                        {{session('update_info_success')}}
-                    </div>
-                </div>
-                @endif
-
+                @include('share.message')
                 <div class="card-body">
                     <div class="row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('お名前') }}</label>
@@ -39,15 +23,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-8 offset-md-4">
-                            <a href="{{ route('customers.edit') }}">編集する</a>
+                        <div class="col-md-8 offset-md-4 text-right">
+                        <ul>
+                            <li>
+                                <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}">ユーザー情報編集はこちら</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('customers.edit_password', ['customer' => $customer->id]) }}">パスワードの編集はこちら</a>
+                            </li>
+                        </ul>
                         </div>
                     </div>
                 </div>
-
-
-
-                
             </div>
         </div>
     </div>

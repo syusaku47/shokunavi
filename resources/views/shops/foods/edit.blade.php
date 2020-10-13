@@ -9,15 +9,7 @@
     <a href=" {{ route('shops.foods.create',['shop' => $shop->id]) }} " class="btn btn-outline-dark">新規メニュー追加</a>
   </div>
 </div>
-@if ($errors->any())
-              <div class="alert alert danger">
-                <ul>
-                  @foreach ($errors->all() as $error)
-                  <li>{{$error}}</li>
-                  @endforeach
-                </ul>
-              </div>
-            @endif
+@include('share.error')
 
 <form action="{{ route('shops.foods.update', ['shop' => $shop->id]) }}" method="POST" >
   @csrf
