@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap");
+
+header {
+    font-family: "Roboto Slab", serif;
+}
+
+h2 {
+    font-size: 0.2rem;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    font-size: 14px;
+}
+
+label span {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+.good {
+    color: red;
+}
+
+.material-icons {
+    color: red;
+}
+
+.form-info p {
+    font-size: 18px;
+}
+
+/* モーダル設定 */
+
+#open,
+#close {
+    cursor: pointer;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    padding: 12px 0;
+    margin: 16px auto 0;
+}
+
+#mask {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    /* 画面いっぱいに広がる */
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#modal {
+    background: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    position: absolute;
+    top: 40px;
+    /* 中央揃えに出来る */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transition: transform 0.4s;
+    z-index: 2;
+}
+
+#modal > p {
+    margin: 0 0 20px;
+}
+
+#mask.hidden {
+    display: none;
+}
+
+#modal.hidden {
+    transform: translate(0, -500px);
+}

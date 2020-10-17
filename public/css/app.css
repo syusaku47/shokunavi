@@ -1,73 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-li{
-  list-style:none
-}
-
-body {
-  font-size: 14px;
-}
-
-.good{
-  color:red;
-}
-
-.material-icons{
-  color:red;
-}
-
-/* モーダル設定 */
-
-#open, #close {
-  cursor: pointer;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: center;
-  padding: 12px 0;
-  margin: 16px auto 0;
-}
-
-#mask {
-  background: rgba(0, 0, 0 ,0.4);
-  position: fixed;
-  /* 画面いっぱいに広がる */
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 1;
-}
-
-#modal {
-  background: #fff;
-  width: 300px;
-  padding: 20px;
-  border-radius: 4px;
-  position: absolute;
-  top: 40px;
-  /* 中央揃えに出来る */
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  transition: transform 0.4s;
-  z-index: 2;
-}
-
-#modal > p {
-  margin: 0 0 20px;
-}
-
-#mask.hidden {
-  display: none;
-}
-
-#modal.hidden {
-  transform: translate(0, -500px);
-}
-
 /*!
- * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -299,6 +233,7 @@ caption {
 
 th {
   text-align: inherit;
+  text-align: -webkit-match-parent;
 }
 
 label {
@@ -4005,6 +3940,8 @@ input[type=button].btn-block {
   display: block;
   min-height: 1.44rem;
   padding-left: 1.5rem;
+  -webkit-print-color-adjust: exact;
+          color-adjust: exact;
 }
 
 .custom-control-inline {
@@ -5584,6 +5521,7 @@ a.badge-dark.focus {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 2;
   padding: 0.75rem 1.25rem;
   color: inherit;
 }
@@ -10852,7 +10790,7 @@ a.text-dark:focus {
 
 .text-break {
   word-break: break-word !important;
-  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .text-reset {

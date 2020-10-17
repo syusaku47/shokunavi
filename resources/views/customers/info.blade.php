@@ -9,29 +9,29 @@
 
                 @include('share.message')
                 <div class="card-body">
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('お名前') }}</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control mb-4" name="name" value="{{ $customer->name }}" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }} </label>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control mb-4"  name="email" value="{{ $customer->email }}" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8 offset-md-4 text-right">
-                        <ul>
-                            <li>
+                    <div class="form-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-right mb-4">{{ __('お名前') }}</p>
+                                <p class="text-right mb-4">{{ __('メールアドレス') }} </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-4">{{ $customer->name }}</p>
+                                <p class="mb-4">{{ $customer->email }}</p>
+                        <ul class="m-0 p-0">
+                            <li class="mb-2">
                                 <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}">ユーザー情報編集はこちら</a>
                             </li>
-                            <li>
+                            <li class="mb-2">
                                 <a href="{{ route('customers.edit_password', ['customer' => $customer->id]) }}">パスワードの編集はこちら</a>
                             </li>
                         </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="col-md-10 text-right">
+                    <div class="row">
                         </div>
                     </div>
                 </div>
