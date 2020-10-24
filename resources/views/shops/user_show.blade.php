@@ -1,20 +1,21 @@
 @extends('user_layout')
 
-  @section('content')
+@section('content')
+<div class="container">
   <div class='text-right mb-4'>
-  <a href="{{ route('shops.user_index') }}" class="btn btn-outline-dark">店舗一覧に戻る</a>
+    <a href="{{ route('shops.user_index') }}" class="btn btn-outline-dark">店舗一覧に戻る</a>
+  </div>
+  <!-- お店情報 -->
+  <div class="card">
+    <div class="card-header">
+      <h4>{{ $shop->name}}</h4>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ $shop->catchcopy}}</p>
+    </div>
+  </div>
   @include('share.like')
-  </div>
-<!-- お店情報 -->
-<div class="card">
-  <div class="card-header">
-    <h4>{{ $shop->name}}</h4>
-  </div>
-  <div class="card-body">
-    <p class="card-text">{{ $shop->catchcopy}}</p>
-  </div>
+
+  @include('share.food')
 </div>
-
-@include('share.food')
-
 @endsection

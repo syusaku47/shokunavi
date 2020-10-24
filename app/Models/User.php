@@ -39,7 +39,11 @@ class User extends Authenticatable
 
     public function likes()
     {
-      return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class);
+    }
+
+    public function shops()
+    {
+        return $this->belongsToMany('App\Models\Shop', 'likes', 'user_id', 'shop_id');
     }
 }
-

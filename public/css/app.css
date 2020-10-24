@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(/css/user.css);@import url(/css/customer.css);@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
@@ -13,7 +13,7 @@
   --purple: #9561e2;
   --pink: #f66d9b;
   --red: #e3342f;
-  --orange: #f6993f;
+  --orange: #f4623a;
   --yellow: #ffed4a;
   --green: #38c172;
   --teal: #4dc0b5;
@@ -10901,5 +10901,159 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+header {
+  font-family: "Roboto Slab", serif;
+}
+
+header a {
+  color: #f4623a;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+li {
+  list-style: none;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+footer {
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 0.8rem;
+}
+
+ul {
+  margin: 0;
+}
+
+.badge {
+  font-size: 1rem;
+  line-height: 0.8;
+}
+
+label span {
+  color: white;
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.material-icons {
+  color: red;
+}
+
+.form-info p {
+  font-size: 18px;
+}
+
+.row .card {
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.card img {
+  border-radius: 8px;
+}
+
+.attention {
+  padding: 0 62px;
+}
+
+.attention h2 {
+  font-size: 1.2rem;
+}
+
+.attention p {
+  font-size: 0.8rem;
+  padding: 0 24px;
+}
+
+/* モーダル設定 */
+
+.close {
+  display: none;
+}
+
+.open {
+  display: block;
+}
+
+.card {
+  position: relative;
+}
+
+#setting-float {
+  background-color: #fff;
+  position: absolute;
+  top: -35px;
+  right: -155px;
+  z-index: 100;
+}
+
+.modal {
+  display: none;
+}
+
+#open,
+#close {
+  cursor: pointer;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 0;
+  margin: 16px auto 0;
+}
+
+#mask {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  /* 画面いっぱいに広がる */
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#modal {
+  background: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 4px;
+  position: absolute;
+  top: 40px;
+  /* 中央揃えに出来る */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: transform 0.4s;
+  z-index: 2;
+}
+
+#modal > p {
+  margin: 0 0 20px;
+}
+
+#mask.hidden {
+  display: none;
+}
+
+#modal.hidden {
+  transform: translate(0, -500px);
 }
 
