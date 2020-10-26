@@ -34,7 +34,6 @@ class UsersController extends Controller
     public function info(User $user)
     {
         $shops = $user->shops()->get();
-        dd($shops);
 
         return view('users.info', [
             'user' => $user,

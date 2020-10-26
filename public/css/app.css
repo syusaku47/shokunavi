@@ -10923,12 +10923,15 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 body {
   font-size: 14px;
+}
+
+.wrapper {
   min-height: 100vh;
+  position: relative;
 }
 
 footer {
@@ -10936,6 +10939,10 @@ footer {
   height: 3rem;
   line-height: 3rem;
   font-size: 0.8rem;
+  position: absolute;
+  /*←絶対位置*/
+  bottom: 0;
+  /*下に固定*/
 }
 
 ul {

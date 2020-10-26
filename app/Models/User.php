@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function shops()
     {
-        return $this->hasManyThrough('App\Models\Shop', 'App\Models\Like', 'user_id', 'id', 'customer_id', 'shop_id');
+        return $this->hasManyThrough('App\Models\Shop', 'App\Models\Like', 'user_id', 'id', null, 'shop_id');
     }
 }

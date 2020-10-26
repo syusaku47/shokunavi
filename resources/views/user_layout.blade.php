@@ -19,36 +19,43 @@
   <title>食なび</title>
 </head>
 
-<header>
-  <div class="bg-white border-bottom mb-5">
-    <nav class="navbar navbar-expand navbar-light container">
-
-      @if(Auth::check())
-      <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
-      <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび </a>
-      <span class="navbar-item "><a href="{{ route('users.info', Auth::user()->id) }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
-      ｜
-      <a href="#" id="logout" class="navbar-item">ログアウト</a>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-      </form>
-      @else
-      <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
-      <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび</a>
-      <ul class="navbar-nav ml-auto my-2 my-lg-0">
-        <li class="nav-item mr-2"><a href="{{ route('login') }}">ログイン</a></li>
-        <li class="nav-item mr-2"><a href="{{ route('register') }}">会員登録</a></li>
-        <li class="nav-item mr-2"><a href="{{ route('about') }}">about</a></li>
-        <li class="nav-item mr-2"><a href="{{ route('test') }}">test</a></li>
-      </ul>
-      @endif
-    </nav>
-  </div>
-</header>
-
 <body class="bg-light">
-  @yield('content')
+  <div class="wrapper">
+    <header class="sticky-top">
+      <div class="bg-white border-bottom mb-5">
+        <nav class="navbar navbar-expand navbar-light container">
 
+          @if(Auth::check())
+          <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
+          <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび </a>
+          <span class="navbar-item "><a href="{{ route('users.info', Auth::user()->id) }}"> ようこそ, {{ Auth::user()->name }}さん</a></span>
+          ｜
+          <a href="#" id="logout" class="navbar-item">ログアウト</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+          @else
+          <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
+          <a class="navbar-brand mr-4" href="{{ route('shops.user_index') }}">食なび</a>
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li class="nav-item mr-2"><a href="{{ route('login') }}">ログイン</a></li>
+            <li class="nav-item mr-2"><a href="{{ route('register') }}">会員登録</a></li>
+            <li class="nav-item mr-2"><a href="{{ route('about') }}">about</a></li>
+            <li class="nav-item mr-2"><a href="{{ route('test') }}">test</a></li>
+          </ul>
+          @endif
+        </nav>
+      </div>
+    </header>
+
+    <main class="mb-4">
+      @yield('content')
+    </main>
+
+    <footer class="text-center bg-white">
+      &copy; 2020 SHOKUNAVI
+    </footer>
+  </div>
 
   @if(Auth::check())
   <script>
@@ -58,10 +65,6 @@
     });
   </script>
   @endif
-
-  <footer class="text-center bg-white">
-    &copy; 2020 SHOKUNAVI
-  </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

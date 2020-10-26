@@ -50,8 +50,8 @@
 <div class="container">
     <section class="py-5">
         <ul class="nav nav-tabs mb-4">
-            <li class="nav-item"><a href="#like" class="nav-link active" data-toggle="tab">食べ物</a></li>
-            <li class="nav-item"><a href="#reservation" class="nav-link" data-toggle="tab">飲み物</a></li>
+            <li class="nav-item"><a href="#like" class="nav-link active" data-toggle="tab">いいねした店舗</a></li>
+            <li class="nav-item"><a href="#reservation" class="nav-link" data-toggle="tab">予約した店舗</a></li>
         </ul>
         <div class="tab-content">
             <div id="like" class="tab-pane active">
