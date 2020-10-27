@@ -4,7 +4,6 @@
 <div class="container">
   <div class="d-flex align-items-center mt-4">
     <h1 class="mr-auto">店舗情報一覧</h1>
-
     <div>
       <p>お店の名前で検索してください</p>
       <form method="GET" action="{{ route('shops.user_index') }}" class="form-inline my-2 my-lg-0">
@@ -13,12 +12,13 @@
       </form>
     </div>
   </div>
-
+</div>
+<div class="container">
   <div class="card-deck mt-4">
     <div class="row">
       @foreach ($shops as $shop)
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <a href="{{ route('shops.user_show', ['shop'=>$shop->id]) }}" class="card-link">
             <img class="card-img-top" src="/uploads/{{ $shop->image }}">
           </a>
@@ -34,6 +34,6 @@
     </div>
   </div>
 </div>
+<!--container-->
 {{ $shops->links() }}
-</div>
 @endsection

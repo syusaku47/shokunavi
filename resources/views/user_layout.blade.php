@@ -47,7 +47,6 @@
         </nav>
       </div>
     </header>
-
     <main class="mb-4">
       @yield('content')
     </main>

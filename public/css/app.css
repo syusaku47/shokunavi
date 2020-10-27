@@ -10932,6 +10932,8 @@ body {
 .wrapper {
   min-height: 100vh;
   position: relative;
+  padding-bottom: 3rem;
+  box-sizing: content-box;
 }
 
 footer {

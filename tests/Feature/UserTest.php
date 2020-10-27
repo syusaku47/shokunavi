@@ -6,12 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Shop;
 use App\Models\User;
+use Auth;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase;
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
         // テストケース実行前にコンテンツデータを作成する
@@ -43,28 +44,29 @@ class UserTest extends TestCase
 
     public function test_user_access()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $user = User::find(1);
 
-        $response = $this->actingAs($user)->get(route('users.show',[
+        $response = $this->actingAs($user)->get(route('users.info', [
             'user' => $user->id
         ]))->assertStatus(200);
-        
-        $response = $this->get(route('users.edit',[
+
+        $this->assertTrue(Auth::check());
+        $response = $this->get(route('users.edit', [
             'user' => $user->id
         ]))->assertStatus(200);
-        
-        $response = $this->get(route('users.edit_password',[
-            'user' => $user->id
-            ]))->assertStatus(200);
 
-        $response = $this->post(route('users.destroy',[
+        $response = $this->get(route('users.edit_password', [
             'user' => $user->id
-            ]))->assertStatus(200);
+        ]))->assertStatus(200);
 
-        $response = $this->get(route('users.edit',[
+        $response = $this->post(route('users.destroy', [
+            'user' => $user->id
+        ]))->assertRedirect('login');
+
+        $response = $this->get(route('users.edit', [
             'user' => 1000
-        ]))->assertStatus(404);
+        ]))->assertStatus(302);
     }
 }
