@@ -19,7 +19,30 @@ class UserTest extends TestCase
         $this->seed('UsersTableSeeder');
     }
 
-    public function test_user_no_login()
+    public function valid_user_can_login()
+    {
+        // ユーザーを１つ作成
+        $user = factory(User::class)->create([
+            'password'  => bcrypt('test1111')
+        ]);
+
+        // まだ、認証されていない
+        $this->assertFalse(Auth::check());
+
+        // ログインを実行
+        $response = $this->post('login', [
+            'email'    => $user->email,
+            'password' => 'test1111'
+        ]);
+
+        // 認証されている
+        $this->assertTrue(Auth::check());
+
+        // ログイン後にホームページにリダイレクトされるのを確認
+        $response->assertRedirect(route('shops.user_index'));
+    }
+
+    public function test_user_cannot_login()
     {
         // ログイン画面にいけるか
         $response = $this->get('/login')->assertStatus(200);
@@ -28,23 +51,21 @@ class UserTest extends TestCase
         $response = $this->get('users/shops/user_index')->assertStatus(302);
     }
 
-    public function test_user_no_register()
+    public function test_user_can_register()
     {
-        $user = User::find(1);
-
+        $this->withoutExceptionHandling();
         // ログイン画面にいけるか
-        $response = $this->get('/register')->assertStatus(200);
-        // $response = $this->post('/register',[
-        //     'name' => 'sato',
-        //     'email' => 'sato@gmail.com',
-        //     'password' => 'satoDaiki',
-        //     'remember' => 'satoDaiki',
-        // ])->assertRedirect('users/shops/user_index');
+        $response = $this->get('register')->assertStatus(200);
+        $response = $this->post(route('register', [
+            'name' => 'sirasunnnnnnn',
+            'email' => 'sirasu@gmail.com',
+            'password' => 'sirasusan',
+        ]))->assertRedirect('users/shops/user_index');
     }
 
     public function test_user_access()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $user = User::find(1);
 
@@ -65,8 +86,10 @@ class UserTest extends TestCase
             'user' => $user->id
         ]))->assertRedirect('login');
 
+        $user = User::find(2);
+
         $response = $this->get(route('users.edit', [
-            'user' => 1000
-        ]))->assertStatus(302);
+            'user' => 2
+        ]))->assertRedirect('login');
     }
 }
