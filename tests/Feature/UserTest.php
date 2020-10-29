@@ -19,7 +19,7 @@ class UserTest extends TestCase
         $this->seed('UsersTableSeeder');
     }
 
-    public function valid_user_can_login()
+    public function test_user_can_login()
     {
         // ユーザーを１つ作成
         $user = factory(User::class)->create([
@@ -60,8 +60,10 @@ class UserTest extends TestCase
             'name' => 'sirasunnnnnnn',
             'email' => 'sirasu@gmail.com',
             'password' => 'sirasusan',
+            'password_confirmation' => 'sirasusan'
         ]))->assertRedirect('users/shops/user_index');
     }
+
 
     public function test_user_access()
     {
@@ -85,11 +87,53 @@ class UserTest extends TestCase
         $response = $this->post(route('users.destroy', [
             'user' => $user->id
         ]))->assertRedirect('login');
+    }
 
+    public function test_user_cannot_access()
+    {
         $user = User::find(2);
 
+        //User認証していないのでlogin画面にリダイレクト
         $response = $this->get(route('users.edit', [
             'user' => 2
         ]))->assertRedirect('login');
+
+        //User認証していないのでlogin画面にリダイレクト
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)->get(route('users.edit', [
+            'user' => $user->id
+        ]))->assertStatus(200);
+    }
+
+    public function valid_user_can_edit()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+
+
+        $response = $this->actingAs($user)->post(route('users.edit', [
+            'user' => $user->id,
+            'name' => 'tanabe',
+            'email' => 'tanabe@gmail.com',
+        ]))->assertRedirect(route('users.info', [
+            'user' => $user->id
+        ]));
+    }
+
+
+
+    public function test_user_cannot_edit()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+
+
+        $response = $this->actingAs($user)->post(route('users.edit', [
+            'user' => $user->id,
+            'name' => 'tanabe',
+            'email' => 'tanabe@gmail.com',
+        ]))->assertRedirect(route('users.info', [
+            'user' => $user->id
+        ]));
     }
 }

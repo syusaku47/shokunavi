@@ -41,6 +41,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        //リクエスト先とログインした人物が同じかチェック
+        'loginUserCheck' => [
+            \App\Http\Middleware\LoginUserCheck::class,
+        ],
     ];
 
     /**

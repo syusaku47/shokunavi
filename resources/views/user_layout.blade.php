@@ -56,6 +56,7 @@
     </footer>
   </div>
 
+
   @if(Auth::check())
   <script>
     document.getElementById('logout').addEventListener('click', function(event) {

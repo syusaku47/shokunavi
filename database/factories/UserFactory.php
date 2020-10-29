@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    static $password;
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail, // 複数レコード作成時には重複しないＥメールを生成

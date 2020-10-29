@@ -14,6 +14,7 @@
   </div>
 </div>
 <div class="container">
+  @include('share.message')
   <div class="card-deck mt-4">
     <div class="row">
       @foreach ($shops as $shop)
