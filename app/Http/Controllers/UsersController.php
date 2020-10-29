@@ -34,7 +34,7 @@ class UsersController extends Controller
     public function info(User $user)
     {
         $shops = $user->shops()->get();
-
+        $this->authorize('view', $user);
         return view('users.info', [
             'user' => $user,
             'shops' => $shops,

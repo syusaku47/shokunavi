@@ -16,7 +16,6 @@ class LoginUserCheck
      */
     public function handle($request, Closure $next)
     {
-        dd($request);
         //ログインユーザーIDを取得
         $loginId = Auth::id();
         //カート情報のユーザーIDを取得

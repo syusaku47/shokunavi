@@ -12,21 +12,19 @@ Route::get('/test', 'HomeController@test')->name('test');
 
 //ユーザーログイン後
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
-    Route::get('/shops/user_index', 'ShopsController@user_index')->name('shops.user_index');
 
-    Route::group(['middleware' => 'loginUserCheck'], function () {
-        Route::get('/{user}/edit', 'UsersController@showEditForm')->name('users.edit');
-        Route::post('/{user}/edit', 'UsersController@edit');
-        Route::get('/{user}/edit/password', 'UsersController@showEditPasswordForm')->name('users.edit_password');
-        Route::post('/{user}/edit/password', 'UsersController@editPassword');
-        Route::get('/{user}', 'UsersController@info')->name('users.info');
-        Route::post('/{user}', 'UsersController@destroy')->name('users.destroy');
+    Route::get('/{user}/edit', 'UsersController@showEditForm')->name('users.edit');
+    Route::post('/{user}/edit', 'UsersController@edit');
+    Route::get('/{user}/edit/password', 'UsersController@showEditPasswordForm')->name('users.edit_password');
+    Route::post('/{user}/edit/password', 'UsersController@editPassword');
+    Route::get('/{user}', 'UsersController@info')->name('users.info');
+    Route::post('/{user}', 'UsersController@destroy')->name('users.destroy');
 
-        Route::group(['prefix' => 'shops'], function () {
-            Route::get('/{shop}', 'ShopsController@user_show')->name('shops.user_show');
-            Route::post('/{id}/likes', 'LikesController@store');
-            Route::post('/{id}/likes/{like}', 'LikesController@destroy');
-        });
+    Route::group(['prefix' => 'shops'], function () {
+        Route::get('/user_index', 'ShopsController@user_index')->name('shops.user_index');
+        Route::get('/{shop}', 'ShopsController@user_show')->name('shops.user_show');
+        Route::post('/{id}/likes', 'LikesController@store');
+        Route::post('/{id}/likes/{like}', 'LikesController@destroy');
     });
 });
 
