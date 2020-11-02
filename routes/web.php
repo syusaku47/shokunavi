@@ -14,10 +14,10 @@ Route::get('/test', 'HomeController@test')->name('test');
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 
     Route::get('/{user}/edit', 'UsersController@showEditForm')->name('users.edit');
-    Route::post('/{user}/edit', 'UsersController@edit');
+    Route::post('/{user}/edit', 'UsersController@update')->name('users.update');
     Route::get('/{user}/edit/password', 'UsersController@showEditPasswordForm')->name('users.edit_password');
-    Route::post('/{user}/edit/password', 'UsersController@editPassword');
-    Route::get('/{user}', 'UsersController@info')->name('users.info');
+    Route::post('/{user}/edit/password', 'UsersController@updatePassword')->name('users.update_password');
+    Route::get('/{user}', 'UsersController@show')->name('users.show');
     Route::post('/{user}', 'UsersController@destroy')->name('users.destroy');
 
     Route::group(['prefix' => 'shops'], function () {
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'customers', 'middleware' => 'auth:customer'], functio
     });
 
     //Customer情報編集
-    Route::get('/{customer}/info', 'CustomersController@info')->name('customers.info');
+    Route::get('/{customer}/show', 'CustomersController@show')->name('customers.show');
     Route::get('/{customer}/edit', 'CustomersController@showEditForm')->name('customers.edit');
     Route::post('/{customer}/edit', 'CustomersController@edit');
     Route::get('/{customer}/edit/password', 'CustomersController@showEditPasswordForm')->name('customers.edit_password');

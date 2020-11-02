@@ -30,10 +30,9 @@ class FoodsController extends Controller
      */
     public function create(Shop $shop)
     {
-        return view('shops.foods.create',[
-            'shop'=>$shop
-        ]
-    );
+        return view('shops.foods.create', [
+            'shop' => $shop
+        ]);
     }
 
     /**
@@ -44,25 +43,25 @@ class FoodsController extends Controller
      */
     public function store(CreateFood $request, $id)
     {
-        $shop = Shop::find($id);
-        $i=0;
+        $shop = Shop::findOrFail($id);
+        $i = 0;
         foreach ($request->num as $val) {
             $food = new Food();
-            
+
             $food->name = $request->menu_name[$i];
-            if($i>1){
+            if ($i > 1) {
                 $food->category_id = 2;
-            }else{
+            } else {
                 $food->category_id = 1;
             }
 
-            if( $request->tips[$i] == 1 ){
+            if ($request->tips[$i] == 1) {
                 $food->tips = $request->tips[$i];
-            } 
+            }
 
             $food->price = $request->price[$i];
             $food->description = $request->description[$i];
-            
+
             $food->shop_id = $shop->id;
             $food->created_at = Carbon::now();
             $food->updated_at = Carbon::now();
@@ -70,8 +69,8 @@ class FoodsController extends Controller
             $i++;
         }
 
-        return redirect()->route('shops.show',[
-            'shop'=>$shop->id
+        return redirect()->route('shops.show', [
+            'shop' => $shop->id
         ]);
     }
 
@@ -93,14 +92,14 @@ class FoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Shop $shop)
-    {  
-        $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
-        $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
-        
-        return view('shops.foods.edit',[
-        'shop' => $shop,
-        'foods' => $foods,
-        'drinks' => $drinks,
+    {
+        $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
+        $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+
+        return view('shops.foods.edit', [
+            'shop' => $shop,
+            'foods' => $foods,
+            'drinks' => $drinks,
         ]);
     }
 
@@ -114,9 +113,9 @@ class FoodsController extends Controller
     public function update(EditFood $request, Shop $shop)
     {
         $foods = $shop->foods()->get();
-        $i=0;
+        $i = 0;
         foreach ($foods as $food) {
-            
+
             $food->name = $request->menu_name[$i];
             $food->price = $request->price[$i];
             $food->description = $request->description[$i];
@@ -135,11 +134,11 @@ class FoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop,Food $food)
+    public function destroy(Shop $shop, Food $food)
     {
         $food->delete();
-        return redirect()->route('shops.show',[
-        'shop'=> $shop
-            ]);
+        return redirect()->route('shops.show', [
+            'shop' => $shop
+        ]);
     }
 }

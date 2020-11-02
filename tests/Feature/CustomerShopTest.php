@@ -13,7 +13,7 @@ class CustomerShopTest extends TestCase
     // テストケースごとにデータベースをリフレッシュしてマイグレーションを再実行する
     use RefreshDatabase;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
         // テストケース実行前にコンテンツデータを作成する
@@ -31,7 +31,7 @@ class CustomerShopTest extends TestCase
         $this->assertTrue($result);
 
         //データベースに存在するか？
-        $this->assertDatabaseHas('customers',[
+        $this->assertDatabaseHas('customers', [
             'name' => 'saori',
             'email' => 'saori@gmail.com',
             'password' => 'saoriHasegawa'
@@ -45,37 +45,37 @@ class CustomerShopTest extends TestCase
         $this->withoutExceptionHandling();
 
         // ログインユーザー定義
-        $customer = Customer::find(1);
-        $shop = Shop::find(2);
+        $customer = Customer::findOrFail(1);
+        $shop = Shop::findOrFail(2);
 
         // ログインして店舗一覧にいけるか
-        $response = $this->actingAs($customer,'customer')
-                        ->get( route('shops.index') )->assertStatus(200);
+        $response = $this->actingAs($customer, 'customer')
+            ->get(route('shops.index'))->assertStatus(200);
 
         $response = $this->get(route('shops.create'))
-                        ->assertStatus(200);
+            ->assertStatus(200);
 
-        $response = $this->get(route('shops.edit',[
+        $response = $this->get(route('shops.edit', [
             'shop' => $shop->id
-            ]))->assertStatus(200);
+        ]))->assertStatus(200);
 
-        $response = $this->get(route('shops.show',[
+        $response = $this->get(route('shops.show', [
             'shop' => $shop->id
-            ]))->assertStatus(200);
+        ]))->assertStatus(200);
 
-            
-            // $response = $this->put('customers/shops/'.$shop->id,[
-            //     'name' => 'ビアホール',
-            //     'catchcopy' => 'おいしいよ！',
-            //     'recommend' => 'すごくおいしいよ！'
-            //     ])->assertRedirect(route('shops.index'));
-                
-                // ログインしてIDの店舗一覧にいけるか
-                $response = $this->get('customers/shops/1')
-                ->assertStatus(200);
-                
-                $response = $this->delete(route('shops.destroy',['shop' => $shop->id]) )
-                                ->assertRedirect(route('shops.index'));
+
+        // $response = $this->put('customers/shops/'.$shop->id,[
+        //     'name' => 'ビアホール',
+        //     'catchcopy' => 'おいしいよ！',
+        //     'recommend' => 'すごくおいしいよ！'
+        //     ])->assertRedirect(route('shops.index'));
+
+        // ログインしてIDの店舗一覧にいけるか
+        $response = $this->get('customers/shops/1')
+            ->assertStatus(200);
+
+        $response = $this->delete(route('shops.destroy', ['shop' => $shop->id]))
+            ->assertRedirect(route('shops.index'));
 
         /**
          * @expectedException \Illuminate\Database\Eloquent\ModelNotFoundException
@@ -83,5 +83,5 @@ class CustomerShopTest extends TestCase
         // $response = $this->get('customer/shops/1000')
         //                 ->assertStatus(404);
 
-    } 
+    }
 }

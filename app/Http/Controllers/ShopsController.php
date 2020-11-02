@@ -23,10 +23,10 @@ class ShopsController extends Controller
     {
         $shops = Shop::all();
         $shops = DB::table('shops')
-        ->select('id','name','catchcopy','recommend','image','updated_at')
-        ->orderBy('updated_at','desc')
-        ->paginate(20);
-    
+            ->select('id', 'name', 'catchcopy', 'recommend', 'image', 'updated_at')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
+
         return view('shops.index', [
             'shops' => $shops,
         ]);
@@ -58,7 +58,7 @@ class ShopsController extends Controller
         $shop->customer_id = Auth::user()->id;
         $shop->created_at = Carbon::now();
         $shop->updated_at = Carbon::now();
-        $shop->save(); 
+        $shop->save();
 
         return redirect()->route('shops.index');
     }
@@ -71,13 +71,13 @@ class ShopsController extends Controller
      */
     public function show(Shop $shop)
     {
-        $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
-        $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
+        $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
+        $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
 
-        return view('shops/show',[
-        'shop' => $shop,
-        'foods' => $foods,
-        'drinks' => $drinks,
+        return view('shops/show', [
+            'shop' => $shop,
+            'foods' => $foods,
+            'drinks' => $drinks,
         ]);
     }
 
@@ -91,9 +91,9 @@ class ShopsController extends Controller
     {
         $foods = $shop->foods()->get();
 
-        return view('shops.edit',[
-        'shop' => $shop,
-        'foods' => $foods
+        return view('shops.edit', [
+            'shop' => $shop,
+            'foods' => $foods
         ]);
     }
 
@@ -106,7 +106,7 @@ class ShopsController extends Controller
      */
     public function update(EditShop $request, $id)
     {
-        $shop = Shop::find($id);
+        $shop = Shop::findOrFail($id);
         $shop->name = $request->name;
         $shop->catchcopy = $request->catchcopy;
         $shop->recommend = $request->recommend;
@@ -116,7 +116,7 @@ class ShopsController extends Controller
         $shop->updated_at = Carbon::now();
         $shop->save();
 
-        return redirect()->route('shops.show',[
+        return redirect()->route('shops.show', [
             'shop' => $shop,
         ]);
     }
@@ -147,9 +147,9 @@ class ShopsController extends Controller
     public function user_show(Shop $shop)
     {
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
-        $foods = $shop->foods()->where('category_id', 1 )->get();   //食事メニュー取得
-        $drinks = $shop->foods()->where('category_id', 2 )->get();  //ドリンク取得
+        $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
+        $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
         return view('shops.user_show')
-        ->with(array('shop' => $shop, 'like' => $like, 'foods'=>$foods ,'drinks'=>$drinks));
+            ->with(array('shop' => $shop, 'like' => $like, 'foods' => $foods, 'drinks' => $drinks));
     }
 }

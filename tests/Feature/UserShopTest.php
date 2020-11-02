@@ -27,7 +27,7 @@ class UserShopTest extends TestCase
         // $this->withoutExceptionHandling();
 
         // ログインユーザー定義
-        $user = User::find(1);
+        $user = User::findOrFail(1);
 
         // ログインして店舗一覧にいけるか
         $response = $this->actingAs($user)->get('users/shops/user_index')->assertStatus(200);
@@ -40,7 +40,7 @@ class UserShopTest extends TestCase
     public function test_user_likes()
     {
         // ログインユーザー定義
-        $user = User::find(1);
+        $user = User::findOrFail(1);
 
         // いいねをして同じ画面に戻るか
         $response = $this->actingAs($user)->post('users/shops/1/likes', [

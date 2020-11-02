@@ -20,22 +20,22 @@ class UsersController extends Controller
         ]);
     }
 
-    public function edit(EditUser $request, User $user)
+    public function update(EditUser $request, User $user)
     {
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return redirect()->route('users.info', [
+        return redirect()->route('users.show', [
             'user' => $user->id
         ])->with('update_info_success', 'ユーザー情報を変更しました。');
     }
 
-    public function info(User $user)
+    public function show(User $user)
     {
         $shops = $user->shops()->get();
         $this->authorize('view', $user);
-        return view('users.info', [
+        return view('users.show', [
             'user' => $user,
             'shops' => $shops,
         ]);
@@ -49,14 +49,14 @@ class UsersController extends Controller
         ]);
     }
 
-    public function editPassword(EditPassword $request, User $user)
+    public function updatePassword(EditPassword $request, User $user)
     {
 
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
 
         return redirect()
-            ->route('users.info', ['user' => $user->id])
+            ->route('users.show', ['user' => $user->id])
             ->with('update_password_success', 'パスワードを変更しました。');
     }
 
