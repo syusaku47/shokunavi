@@ -91,7 +91,7 @@ class UserTest extends TestCase
 
     public function test_user_cannot_access()
     {
-        $user = User::findOrFail(2);
+        $user = User::find(2);
 
         //User認証していないのでlogin画面にリダイレクト
         $response = $this->get(route('users.edit', [
@@ -120,6 +120,8 @@ class UserTest extends TestCase
         ]))->assertRedirect(route('users.show', [
             'user' => $user->id
         ]));
+
+        $this->
     }
 
     public function test_user_cannot_edit()

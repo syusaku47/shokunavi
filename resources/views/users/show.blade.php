@@ -75,9 +75,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-content">
             <div id="reservation" class="tab-pane">
+                <h1 class="text-center">準備中</h1>
             </div>
         </div>
     </section>

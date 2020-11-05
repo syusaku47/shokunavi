@@ -15,31 +15,43 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>食なび</title>
 </head>
-<header>
-  <div class="bg-white border-bottom mb-5">
-    <nav class="navbar navbar-expand navbar-light container">
-
-      @if(Auth::guard('customer')->check())
-      <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび</a>
-      <span class="navbar-item "> <a href="{{ route('customers.show',['customer' => Auth::guard('customer')->user()->id]) }}">ようこそ, {{ Auth::guard('customer')->user()->name }}さん</a></span>
-      ｜
-      <a href="#" id="logout" class="navbar-item">ログアウト</a>
-      <form id="logout-form" action="{{ route('customers.auth.logout') }}" method="POST" style="display: none;">
-        @csrf
-      </form>
-      @else
-      <a class="navbar-brand mr-4" href="{{ route('customers.auth.login') }}">食なび</a>
-      <a class="navbar-item" href="{{ route('customers.auth.login') }}">ログイン</a>
-      ｜
-      <a class="navbar-item" href="{{ route('customers.auth.register') }}">会員登録</a>
-      @endif
-    </nav>
-  </div>
-</header>
 
 <body class="bg-light">
-  <div class="container">
-    @yield('content')
+  <div class="wrapper">
+    <header>
+      <div class="bg-white border-bottom mb-5">
+        <nav class="navbar navbar-expand navbar-light container">
+
+          @if(Auth::guard('customer')->check())
+          <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
+          <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび</a>
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li class="navbar-item mr-2"><a href="{{ route('customers.show',['customer' => Auth::guard('customer')->user()->id]) }}">ようこそ, {{ Auth::guard('customer')->user()->name }}さん</a></li>
+            <li class="navbar-item mr-2"><a href="#" id="logout" class="navbar-item">ログアウト</a></li>
+          </ul>
+          <form id="logout-form" action="{{ route('customers.auth.logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+          @else
+          <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
+          <a class="navbar-brand mr-4" href="{{ route('customers.auth.login') }}">食なび</a>
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li><a class="navbar-item mr-2" href="{{ route('customers.auth.login') }}">ログイン</a></li>
+            <li><a class="navbar-item mr-2" href="{{ route('customers.auth.register') }}">会員登録</a></li>
+          </ul>
+          @endif
+        </nav>
+      </div>
+    </header>
+
+
+    <main class="mb-4">
+      @yield('content')
+    </main>
+
+    <footer class="text-center bg-white">
+      &copy; 2020 SHOKUNAVI
+    </footer>
   </div>
   @if(Auth::check())
   <script>

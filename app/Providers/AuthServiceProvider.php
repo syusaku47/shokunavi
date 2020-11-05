@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model\User' => 'App\Policies\UserPolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 
     /**
@@ -40,7 +40,6 @@ class AuthServiceProvider extends ServiceProvider
 
     public function authorize($data)
     {
-        dd($data);
         $user_id = $data['user_id'];
         $role = self::getUserRole($user_id);
         $password = $data['password'];

@@ -14,7 +14,7 @@ class UsersController extends Controller
 
     public function showEditForm(User $user)
     {
-
+        $this->authorize('view', $user);
         return view('users.edit', [
             'user' => $user,
         ]);
@@ -22,7 +22,7 @@ class UsersController extends Controller
 
     public function update(EditUser $request, User $user)
     {
-
+        $this->authorize('update', $user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
@@ -43,7 +43,7 @@ class UsersController extends Controller
 
     public function showEditPasswordForm(User $user)
     {
-
+        $this->authorize('view', $user);
         return view('users.edit_password', [
             'user' => $user,
         ]);
@@ -51,7 +51,7 @@ class UsersController extends Controller
 
     public function updatePassword(EditPassword $request, User $user)
     {
-
+        $this->authorize('update', $user);
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
 
@@ -63,11 +63,11 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user == Auth::user()) {
-            Auth::logout();
-            $user->delete();
-            return redirect()->route('login');
-        }
+        $this->authorize('delete', $user);
+        Auth::logout();
+        $user->delete();
+        return redirect()->route('login');
+
         return redirect()
             ->back()
             ->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('会員登録') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customer.auth.register') }}">
+                    <form method="POST" action="{{ route('customers.auth.register') }}">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('お名前') }}</label>

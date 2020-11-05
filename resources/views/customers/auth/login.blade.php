@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-8 offset-2 py-4">
             <div class="card">
                 <div class="card-header">{{ __('法人様用ログインフォーム') }}</div>
                 <div class="card-body">
@@ -57,10 +57,21 @@
                             </div>
                         </div>
                     </form>
+                    <hr class="my-4">
+                    <div class="attention">
+                        <h2>【重要】不正ログインによる被害を防ぐためのお願い</h2>
+                        <p>不正ログインによる被害を防ぐため、他サービスで設定しているID・パスワードの使い回しはしない、推測しやすいパスワードは使用しないことをお願いいたします。</p>
+                        <h2>【重要】ログイン状態の保持について</h2>
+                        <p>「ログイン状態を保持する」にチェックを入れてログインした端末からは、登録されている個人情報を他人が閲覧したり、なりすまされて利用される危険性があります。第三者と共用で使用するパソコンをご利用の場合は、お客様のセキュリティ保護の観点からチェックを外してログインしてください。</p>
+                    </div>
                 </div>
             </div>
-            <a href="{{ route('login')}}">食ナビ ログインへ</a>
+        </div>
+    </div><!-- row -->
+    <div class="row">
+        <div class="user-link col-md-8 offset-2 text-right">
+            <a href="{{ route('login') }}">食なび ログインへ</a>
         </div>
     </div>
-</div>
+</div><!-- container -->
 @endsection

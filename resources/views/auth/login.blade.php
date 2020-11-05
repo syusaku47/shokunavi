@@ -63,9 +63,9 @@
                         </div>
                     </form>
                     <!--login-form-->
-                    <div id="open" class="modal">
+                    <!-- <div id="open" class="modal">
                         詳細を見る
-                    </div>
+                    </div> -->
                     <hr class="my-4">
                     <div class="attention">
                         <h2>【重要】不正ログインによる被害を防ぐためのお願い</h2>
@@ -75,7 +75,7 @@
                     </div>
 
                     <!-- モーダル -->
-                    <section>
+                    <!-- <section>
                         <div id="mask" class="hidden"></div>
                         <div id="modal" class="hidden">
                             <h1>使用方法</h1>
@@ -84,9 +84,14 @@
                                 閉じる
                             </div>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="customer-link col-md-8 offset-2 text-right">
+            <a href="{{ route('customers.auth.login') }}">飲食店for ログインへ</a>
         </div>
     </div>
 </div>
