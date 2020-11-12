@@ -13,7 +13,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <title>食なび</title>
+  <title>食なびfor飲食店</title>
 </head>
 
 <body class="bg-light">
@@ -24,7 +24,7 @@
 
           @if(Auth::guard('customer')->check())
           <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
-          <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび</a>
+          <a class="navbar-brand mr-4" href="{{ route('shops.index') }}">食なび<span>for</span>飲食店</a>
           <ul class="navbar-nav ml-auto my-2 my-lg-0">
             <li class="navbar-item mr-2"><a href="{{ route('customers.show',['customer' => Auth::guard('customer')->user()->id]) }}">ようこそ, {{ Auth::guard('customer')->user()->name }}さん</a></li>
             <li class="navbar-item mr-2"><a href="#" id="logout" class="navbar-item">ログアウト</a></li>
@@ -34,7 +34,7 @@
           </form>
           @else
           <img src="{{ asset('images/icon_shokunavi.png') }}" alt="" height="32" width="32">
-          <a class="navbar-brand mr-4" href="{{ route('customers.auth.login') }}">食なび</a>
+          <a class="navbar-brand mr-4" href="{{ route('customers.auth.login') }}">食なび<span>for</span>飲食店</a>
           <ul class="navbar-nav ml-auto my-2 my-lg-0">
             <li><a class="navbar-item mr-2" href="{{ route('customers.auth.login') }}">ログイン</a></li>
             <li><a class="navbar-item mr-2" href="{{ route('customers.auth.register') }}">会員登録</a></li>

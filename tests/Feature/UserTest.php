@@ -19,7 +19,7 @@ class UserTest extends TestCase
         $this->seed('UsersTableSeeder');
     }
 
-    public function test_user_can_login()
+    public function test_can_login()
     {
         // ユーザーを１つ作成
         $user = factory(User::class)->create([
@@ -42,7 +42,7 @@ class UserTest extends TestCase
         $response->assertRedirect(route('shops.user_index'));
     }
 
-    public function test_user_cannot_login()
+    public function test_cannot_login()
     {
         // ログイン画面にいけるか
         $response = $this->get('/login')->assertStatus(200);
@@ -51,7 +51,7 @@ class UserTest extends TestCase
         $response = $this->get('users/shops/user_index')->assertStatus(302);
     }
 
-    public function test_user_can_register()
+    public function test_can_register()
     {
         $this->withoutExceptionHandling();
         // ログイン画面にいけるか
@@ -65,7 +65,7 @@ class UserTest extends TestCase
     }
 
 
-    public function test_user_access()
+    public function test_access()
     {
         // $this->withoutExceptionHandling();
 
@@ -89,7 +89,7 @@ class UserTest extends TestCase
         ]))->assertRedirect('login');
     }
 
-    public function test_user_cannot_access()
+    public function test_cannot_access()
     {
         $user = User::find(2);
 
@@ -107,7 +107,7 @@ class UserTest extends TestCase
         //ログインユーザーが他ユーザーの情報画面にアクセス出来ない
     }
 
-    public function test_user_can_edit()
+    public function test_can_edit()
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
@@ -120,20 +120,18 @@ class UserTest extends TestCase
         ]))->assertRedirect(route('users.show', [
             'user' => $user->id
         ]));
-
-        $this->
     }
 
-    public function test_user_cannot_edit()
+    public function test_cannot_edit()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
 
-        $response = $this->actingAs($user)->post(route('users.edit', [
+        $response = $this->actingAs($user)->post(route('users.update', [
             'user' => $user->id,
             'name' => 'tanabe',
-            'email' => 'tanabe',
+            'email' => 'tanabe@email.com',
         ]))->assertRedirect(route('users.show', [
             'user' => $user->id
         ]));

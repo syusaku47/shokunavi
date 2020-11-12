@@ -9,7 +9,7 @@
                 @include('share.error')
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customers.edit', ['customer' => $customer->id]) }}">
+                    <form method="POST" action="{{ route('customers.update', ['customer' => $customer->id]) }}">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('お名前') }}</label>
@@ -20,7 +20,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }} </label>
                             <div class="col-md-6">
-                                <input type="email" class="form-control mb-4"  name="email" value="{{ old('email') ?? $customer->email }}" />
+                                <input type="email" class="form-control mb-4" name="email" value="{{ old('email') ?? $customer->email }}" />
                             </div>
                         </div>
 

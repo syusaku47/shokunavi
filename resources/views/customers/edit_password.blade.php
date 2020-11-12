@@ -9,7 +9,7 @@
                 @include('share.error')
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customers.edit_password', ['customer' => $customer->id]) }}">
+                    <form method="POST" action="{{ route('customers.update_password', ['customer' => $customer->id]) }}">
                         @csrf
 
                         <div class="form-group row">

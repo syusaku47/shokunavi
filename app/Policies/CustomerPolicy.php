@@ -2,8 +2,7 @@
 
 namespace App\Policies;
 
-use App\Customer;
-use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CustomerPolicy
@@ -11,83 +10,83 @@ class CustomerPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any customers.
+     * Determine whether the customer can view any customers.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Customer  $customer
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(Customer $customer)
     {
         //
     }
 
     /**
-     * Determine whether the user can view the customer.
+     * Determine whether the customer can view the customer.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Customer  $customer
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Customer  $customer
      * @return mixed
      */
-    public function view(User $user, Customer $customer)
+    public function view(Customer $customer, Customer $model)
+    {
+        return $customer->id == $model->id;
+    }
+
+    /**
+     * Determine whether the customer can create customers.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return mixed
+     */
+    public function create(Customer $model)
     {
         //
     }
 
     /**
-     * Determine whether the user can create customers.
+     * Determine whether the customer can update the customer.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Customer  $customer
      * @return mixed
      */
-    public function create(User $user)
+    public function update(Customer $customer, Customer $model)
+    {
+        return $customer->id == $model->id;
+    }
+
+    /**
+     * Determine whether the customer can delete the customer.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Customer  $customer
+     * @return mixed
+     */
+    public function delete(Customer $customer, Customer $model)
+    {
+        return $customer->id == $model->id;
+    }
+
+    /**
+     * Determine whether the customer can restore the customer.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Customer  $customer
+     * @return mixed
+     */
+    public function restore(Customer $customer, Customer $model)
     {
         //
     }
 
     /**
-     * Determine whether the user can update the customer.
+     * Determine whether the customer can permanently delete the customer.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Customer  $customer
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Customer  $customer
      * @return mixed
      */
-    public function update(User $user, Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the customer.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Customer  $customer
-     * @return mixed
-     */
-    public function delete(User $user, Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the customer.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Customer  $customer
-     * @return mixed
-     */
-    public function restore(User $user, Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the customer.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Customer  $customer
-     * @return mixed
-     */
-    public function forceDelete(User $user, Customer $customer)
+    public function forceDelete(Customer $customer, Customer $model)
     {
         //
     }

@@ -5,14 +5,19 @@
     <div class="row">
         <div class="col-md-8 offset-2 py-4">
             <div class="card">
-                <div class="card-header">{{ __('ログインフォーム') }}</div>
+                <div class="card-header">一般ユーザー様ログインフォーム</div>
                 <div class="card-body">
                     <form class="login-form" method="POST" action="{{ route('login') }}">
                         @csrf
+                        <div class="text-center">
+                            <h2>【採用担当者様 専用ログインフォーム】</h2>
+                            <p>下記の「専用ログイン」ボタンを押していただければ、<br>
+                                すぐに専用アカウントでログインが可能です。</p>
+                        </div>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }}</label>
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? 'saiyo@email.com' }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -26,7 +31,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('パスワード') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="saiyotantou" required autocomplete="current-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">

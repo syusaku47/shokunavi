@@ -11,6 +11,7 @@ class CustomersController extends Controller
 
     public function show(Customer $customer)
     {
+        $this->authorize('view', $customer);
         return view('customers.show', [
             'customer' => $customer,
         ]);
@@ -18,13 +19,15 @@ class CustomersController extends Controller
 
     public function showEditForm(Customer $customer)
     {
+        $this->authorize('view', $customer);
         return view('customers.edit', [
             'customer' => $customer,
         ]);
     }
 
-    public function edit(Request $request, Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
+        $this->authorize('update', $customer);
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->save();
@@ -36,14 +39,16 @@ class CustomersController extends Controller
 
     public function showEditPasswordForm(Customer $customer)
     {
+        $this->authorize('view', $customer);
         return view('customers.edit_password', [
             'customer' => $customer,
         ]);
     }
 
 
-    public function editPassword(Request $request, Customer $customer)
+    public function updatePassword(Request $request, Customer $customer)
     {
+        $this->authorize('update', $customer);
         $customer->password = bcrypt($request->get('new-password'));
         $customer->save();
         return redirect()
@@ -53,13 +58,9 @@ class CustomersController extends Controller
 
     public function destroy(Customer $customer)
     {
-        if ($customer == Auth::guard('customer')->user()) {
-            Auth::guard('customer')->logout();
-            $customer->delete();
-            return redirect()->route('customers.auth.login');
-        }
-        return redirect()
-            ->back()
-            ->with('delete_user_failed', 'ユーザー情報を削除できませんでした。');
+        $this->authorize('delete', $customer);
+        Auth::guard('customer')->logout();
+        $customer->delete();
+        return redirect()->route('customers.auth.login');
     }
 }

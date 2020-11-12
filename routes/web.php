@@ -52,8 +52,8 @@ Route::group(['prefix' => 'customers', 'middleware' => 'auth:customer'], functio
     //Customer情報編集
     Route::get('/{customer}/show', 'CustomersController@show')->name('customers.show');
     Route::get('/{customer}/edit', 'CustomersController@showEditForm')->name('customers.edit');
-    Route::post('/{customer}/edit', 'CustomersController@edit');
+    Route::post('/{customer}/edit', 'CustomersController@update')->name('customers.update');
     Route::get('/{customer}/edit/password', 'CustomersController@showEditPasswordForm')->name('customers.edit_password');
-    Route::post('/{customer}/edit/password', 'CustomersController@editPassword');
+    Route::post('/{customer}/edit/password', 'CustomersController@updatePassword')->name('customers.update_password');
     Route::post('/{customer}/destroy', 'CustomersController@destroy')->name('customers.destroy');
 });

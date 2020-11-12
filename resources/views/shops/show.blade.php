@@ -18,8 +18,8 @@
       <h4>{{ $shop->name}}</h4>
     </div>
     <div class="card-body">
-      <p class="card-text">{{ $shop->catchcopy}}</p>
-      <p class="card-text">{{ $shop->recommend}}</p>
+      <p class="card-text">{!! nl2br($shop->catchcopy) !!}</p>
+      <p class="card-text">{!! nl2br($shop->recommend) !!}</p>
     </div>
   </div>
 

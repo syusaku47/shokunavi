@@ -18,12 +18,12 @@
       <div class="col-md-6 mb-4">
         <div class="card h-100">
           <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">
-            <img class="card-img-top" src="/uploads/{{ $shop->image }}">
+            <img class="card-img-top" src="/uploads/{{ $shop->image }}" width=520" height="300">
           </a>
-          <div class="card-body">
+          <div class=" card-body">
             <h5 class="card-title">{{ $shop->name }}</h5>
-            <h6 class="card-subtitle text-muted">{{ $shop->catchcopy }}</h6>
-            <p class="card-text">おすすめ：{{ $shop->recommend }}</p>
+            <h6 class="card-subtitle text-muted">{!! nl2br($shop->catchcopy) !!}</h6>
+            <p class="card-text mt-2">おすすめ：{!! nl2br($shop->recommend) !!}</p>
             <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">店舗情報をもっと見る</a>
           </div>
         </div>
