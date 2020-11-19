@@ -25,6 +25,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
         Route::get('/{shop}', 'ShopsController@user_show')->name('shops.user_show');
         Route::post('/{id}/likes', 'LikesController@store');
         Route::post('/{id}/likes/{like}', 'LikesController@destroy');
+        Route::resource('shops.comments', 'CommentsController');
     });
 });
 

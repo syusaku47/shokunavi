@@ -16,7 +16,7 @@
     <div class="row">
       @foreach ($shops as $shop)
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card h-100" style="width:33rem;">
           <a href="{{ route('shops.show', ['shop'=>$shop->id]) }}" class="card-link">
             <img class="card-img-top" src="/uploads/{{ $shop->image }}">
           </a>

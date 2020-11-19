@@ -14,6 +14,11 @@
       @include('share.error')
       <div class="bg-white p-4">
         <!-- 食べ物、ドリンク情報 -->
+        @if ($foods->isEmpty() && $drinks->isEmpty())
+        <div class="text-center">
+          <h2>登録された商品はありません</h2>
+        </div>
+        @else
         <form action="{{ route('shops.foods.update', ['shop' => $shop->id]) }}" method="POST">
           @csrf
           @foreach ($foods as $food)
@@ -56,6 +61,7 @@
               <button type="submit" class="btn btn-primary">送信</button>
             </div>
         </form>
+        @endif
       </div>
     </div>
   </div>
