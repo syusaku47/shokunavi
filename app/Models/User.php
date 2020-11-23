@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Models\Shop', 'App\Models\Like', 'user_id', 'id', null, 'shop_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

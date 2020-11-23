@@ -149,7 +149,14 @@ class ShopsController extends Controller
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+        $comments = $shop->comments()->get();  //口コミ取得
         return view('shops.user_show')
-            ->with(array('shop' => $shop, 'like' => $like, 'foods' => $foods, 'drinks' => $drinks));
+            ->with(array(
+                'shop' => $shop,
+                'like' => $like,
+                'foods' => $foods,
+                'drinks' => $drinks,
+                'comments' => $comments
+            ));
     }
 }

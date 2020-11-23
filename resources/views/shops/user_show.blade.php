@@ -16,7 +16,8 @@
     </div>
   </div>
   @include('share.like')
+  @include('share.navi')
+  @include('share.js')
 
-  @include('share.food')
 </div>
 @endsection
