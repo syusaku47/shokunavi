@@ -6,7 +6,7 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'users/shops/user_index';
+    protected $redirectTo = 'customers/shops';
 
     /**
      * Create a new controller instance.
@@ -44,18 +44,18 @@ class LoginController extends Controller
     {
         return view('customers.auth.login');  //変更
     }
- 
+
     protected function guard()
     {
         return Auth::guard('customer');  //変更
     }
-    
+
     public function logout(Request $request)
     {
         Auth::guard()->logout();  //変更
         $request->session()->flush();
         $request->session()->regenerate();
- 
+
         return redirect('/customers/login');  //変更
     }
 

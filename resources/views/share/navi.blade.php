@@ -28,7 +28,7 @@
             </ul>
           </div>
           <div class="col-md-2">
-            @if( Auth::guard('customer')->user() )
+            @if( Auth::guard('customer')->check() )
             <!-- 削除フォーム -->
             <form method="POST" id="form_{{ $food->id }}" action="{{ route('shops.foods.destroy',['shop' => $shop->id, 'food'=> $food->id]) }}">
               @csrf
@@ -76,7 +76,7 @@
         @endforeach
       </div><!-- drink-tab-pane -->
 
-      @if( Auth::user() )
+
       <div id="comment" class="tab-pane">
         @foreach ($comments as $comment)
         <div class="row border-bottom align-items-center">
@@ -90,16 +90,19 @@
           </div>
 
           <div class="col-md-2">
+            @if( Auth::guard('customer')->check() )
             <!-- 削除フォーム -->
             <form method="POST" action="{{ route('shops.comments.destroy',['shop' => $shop->id, 'comment'=> $comment->id]) }}" id="form_{{ $comment->id}}">
               @csrf
               @method('DELETE')
               <a href="#" data-id="{{ $comment->id }}" type="submit" class="btn btn-danger" onclick="deleteContent(this);">削除</a><!-- this = aタグ -->
             </form>
+            @endif
           </div>
         </div>
         @endforeach
         <section class="comments-form">
+          @if( Auth::check() )
           <button id="comment-btn" class="my-4 btn-primary">口コミを投稿する</button>
           @include('share.error')
           <form method="POST" action="{{ route('shops.comments.store',['shop'=>$shop->id]) }}" id="comment-form">
@@ -115,8 +118,8 @@
             </div>
             <button type="submit" class="offset-md-1 btn btn-primary">送信</button>
           </form>
+          @endif
         </section>
       </div><!-- comment-tab-pane -->
-      @endif
     </div><!-- tab-content -->
   </section>
