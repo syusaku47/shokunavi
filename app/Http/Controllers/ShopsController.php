@@ -73,11 +73,13 @@ class ShopsController extends Controller
     {
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+        $comments = $shop->comments()->get();  //口コミ取得
 
         return view('shops/show', [
             'shop' => $shop,
             'foods' => $foods,
             'drinks' => $drinks,
+            'comments' => $comments,
         ]);
     }
 
