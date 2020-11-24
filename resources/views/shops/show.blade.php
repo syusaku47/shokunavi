@@ -28,7 +28,7 @@
       <a class="btn btn-outline-dark" href="{{ route('shops.foods.edit',['shop'=>$shop->id]) }}">メニューの編集</a>
     </div>
   </div>
-  @include('share.food')
+  @include('share.navi')
   @include('share.js')
 </div>
 @endsection

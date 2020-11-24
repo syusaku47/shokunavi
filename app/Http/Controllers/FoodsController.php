@@ -125,7 +125,10 @@ class FoodsController extends Controller
             $i++;
         }
 
-        return redirect()->route('shops.index');
+        return redirect()->route('shops.show', [
+            'shop' => $shop,
+            'foods' => $foods,
+        ]);
     }
 
     /**

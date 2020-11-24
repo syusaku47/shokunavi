@@ -21,8 +21,9 @@ class ShopsController extends Controller
      */
     public function index(Request $request)
     {
-        $shops = Shop::all();
+        $customer = Auth::guard('customer')->user();
         $shops = DB::table('shops')
+            ->where('customer_id', $customer->id)
             ->select('id', 'name', 'catchcopy', 'recommend', 'image', 'updated_at')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
@@ -73,11 +74,13 @@ class ShopsController extends Controller
     {
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+        $comments = $shop->comments()->get();  //口コミ取得
 
         return view('shops/show', [
             'shop' => $shop,
             'foods' => $foods,
             'drinks' => $drinks,
+            'comments' => $comments,
         ]);
     }
 
@@ -149,7 +152,14 @@ class ShopsController extends Controller
         $like = $shop->likes()->where('user_id', Auth::user()->id)->first();
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+        $comments = $shop->comments()->get();  //口コミ取得
         return view('shops.user_show')
-            ->with(array('shop' => $shop, 'like' => $like, 'foods' => $foods, 'drinks' => $drinks));
+            ->with(array(
+                'shop' => $shop,
+                'like' => $like,
+                'foods' => $foods,
+                'drinks' => $drinks,
+                'comments' => $comments
+            ));
     }
 }
