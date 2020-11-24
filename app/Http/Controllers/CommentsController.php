@@ -42,7 +42,8 @@ class CommentsController extends Controller
         if (Auth::guard('customer')->user()->id == $comment->user->id) {
             $comment->delete();
             redirect()->route('shops.show', [
-                $shop->id
+                'shop' => $shop->id,
+                'shop' => $shop->id,
             ]);
         }
     }

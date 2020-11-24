@@ -63,7 +63,7 @@
             </ul>
           </div>
           <div class="col-md-2">
-            @if( Auth::guard('customer')->user() )
+            @if( Auth::guard('customer')->check() )
             <!-- 削除フォーム -->
             <form method="POST" action="{{ route('shops.foods.destroy',['shop' => $shop->id, 'food'=> $drink->id]) }}">
               @csrf
@@ -102,7 +102,7 @@
         </div>
         @endforeach
         <section class="comments-form">
-          @if( Auth::check() )
+          @if( Auth::guard('user')->check() )
           <button id="comment-btn" class="my-4 btn-primary">口コミを投稿する</button>
           @include('share.error')
           <form method="POST" action="{{ route('shops.comments.store',['shop'=>$shop->id]) }}" id="comment-form">

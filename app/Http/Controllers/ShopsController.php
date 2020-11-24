@@ -21,8 +21,9 @@ class ShopsController extends Controller
      */
     public function index(Request $request)
     {
-        $shops = Shop::all();
+        $customer = Auth::guard('customer')->user();
         $shops = DB::table('shops')
+            ->where('customer_id', $customer->id)
             ->select('id', 'name', 'catchcopy', 'recommend', 'image', 'updated_at')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
