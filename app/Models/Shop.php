@@ -46,6 +46,6 @@ class Shop extends Model
 
     public function tags()
     {
-        return $this->hasManyThrough('Tag', 'ShopTag', 'shop_id', 'id', null, 'tag_id');
+        return $this->hasManyThrough('App\Models\Tag', 'App\Models\ShopTag', 'shop_id', 'id', null, 'tag_id');
     }
 }

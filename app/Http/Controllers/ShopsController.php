@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateShop;
 use App\Http\Requests\EditShop;
 use App\Models\Shop;
+use App\Models\Tag;
+use App\Models\ShopTag;
 use App\Models\Category;
 use Carbon\Carbon;
 use Auth;
@@ -40,7 +42,10 @@ class ShopsController extends Controller
      */
     public function create()
     {
-        return view('shops.create');
+        $tags = Tag::all();
+        return view('shops.create', [
+            'tags' => $tags
+        ]);
     }
 
     /**
@@ -51,6 +56,7 @@ class ShopsController extends Controller
      */
     public function store(CreateShop $request)
     {
+
         $shop = new Shop();
         $shop->name = $request->name;
         $shop->image = 'default.jpg';
@@ -60,6 +66,14 @@ class ShopsController extends Controller
         $shop->created_at = Carbon::now();
         $shop->updated_at = Carbon::now();
         $shop->save();
+
+
+        foreach ($request->tag as $req) {
+            $tag = new ShopTag();
+            $tag->shop_id = $shop->id;
+            $tag->tag_id = $req;
+            $tag->save();
+        }
 
         return redirect()->route('shops.index');
     }
@@ -74,12 +88,14 @@ class ShopsController extends Controller
     {
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
+        $tags = $shop->tags()->get();
         $comments = $shop->comments()->get();  //口コミ取得
 
         return view('shops/show', [
             'shop' => $shop,
             'foods' => $foods,
             'drinks' => $drinks,
+            'tags' => $tags,
             'comments' => $comments,
         ]);
     }
