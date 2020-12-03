@@ -23,15 +23,22 @@ class ShopsController extends Controller
      */
     public function index(Request $request)
     {
+        // ログインカスターを取得
         $customer = Auth::guard('customer')->user();
+
+        // ログインカスタマーの店舗取得
         $shops = DB::table('shops')
             ->where('customer_id', $customer->id)
             ->select('id', 'name', 'catchcopy', 'recommend', 'image', 'updated_at')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
+        // タグを取得
+        $tags = Tag::all();
+
         return view('shops.index', [
             'shops' => $shops,
+            'tags' => $tags,
         ]);
     }
 
@@ -109,9 +116,20 @@ class ShopsController extends Controller
     public function edit(Shop $shop)
     {
         $foods = $shop->foods()->get();
+        $tags = Tag::all();
+        $shopTags = DB::table('shop_tag')
+            ->where('shop_id', $shop->id)
+            ->select('tag_id')
+            ->get();
+
+        foreach ($shopTags as $shopTag) {
+            $tagId[] = $shopTag->tag_id;
+        }
 
         return view('shops.edit', [
             'shop' => $shop,
+            'tags' => $tags,
+            'tagId' => $tagId,
             'foods' => $foods
         ]);
     }

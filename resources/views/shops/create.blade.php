@@ -20,9 +20,10 @@
           <label for="name">店舗名称 <span class="badge badge-danger">必須</span></label>
           <input type="text" class="form-control mb-4" name="name" id="name" value="{{ old('name') }}" />
         </div>
+        <!-- タグ選択 -->
         @foreach ($tags as $tag)
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="check_{{ $tag->id }}" name="tag[]" value="{{ $tag->id }}" @if (is_array(old('name')) && in_array("1", old('name'), true)) checked @endif>
+          <input class="form-check-input" type="checkbox" id="check_{{ $tag->id }}" name="tag[]" value="{{ $tag->id }}" @if (is_array(old('tag')) && in_array("$tag->id", old('tag'), true)) checked @endif>
           <label class="form-check-label" for="check_{{ $tag->id }}">{{ $tag->name }}</label>
         </div>
         @endforeach

@@ -12,11 +12,11 @@ class ShopTagTableSeeder extends Seeder
      */
     public function run()
     {
-        $n = 10;
+        $n = 5;
         for ($i = 0; $i < $n; $i++) {
             DB::table('shop_tag')->insert([
                 'shop_id' => random_int(1, 3),
-                'tag_id' => random_int(1, 4),
+                'tag_id' => random_int(1, 2),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
