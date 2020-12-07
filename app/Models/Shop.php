@@ -12,6 +12,7 @@ use App\Models\ShopTag;
 
 class Shop extends Model
 {
+    protected $fillable = ['name','image','catchcopy','recommend','customer_id'];
 
     public function foods()
     {

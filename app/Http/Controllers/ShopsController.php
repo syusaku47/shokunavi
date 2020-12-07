@@ -63,24 +63,36 @@ class ShopsController extends Controller
      */
     public function store(CreateShop $request)
     {
+        // $shop = Shop::create([
+        //     'name' => $request->name,
+        //     'image' => 'default.jpg',
+        //     'catchcopy' => $request->catchcopy,
+        //     'recommend' => $request->recommend,
+        //     'customer_id' => Auth::user()->id,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        // ]);
 
         $shop = new Shop();
-        $shop->name = $request->name;
+        $shop->fill($request->all());//fillは
         $shop->image = 'default.jpg';
-        $shop->catchcopy = $request->catchcopy;
-        $shop->recommend = $request->recommend;
         $shop->customer_id = Auth::user()->id;
         $shop->created_at = Carbon::now();
         $shop->updated_at = Carbon::now();
         $shop->save();
 
-
         foreach ($request->tag as $req) {
-            $tag = new ShopTag();
-            $tag->shop_id = $shop->id;
-            $tag->tag_id = $req;
-            $tag->save();
+            $tag = ShopTag::create([
+                'shop_id' => $shop->id,
+                'tag_id' => $req,
+            ]);
         }
+        // foreach ($request->tag as $req) {
+        //     $tag = new ShopTag();
+        //     $tag->shop_id = $shop->id;
+        //     $tag->tag_id = $req;
+        //     $tag->save();
+        // }
 
         return redirect()->route('shops.index');
     }
