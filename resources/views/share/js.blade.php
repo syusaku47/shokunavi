@@ -10,6 +10,10 @@
         }
     }
 
+    function searchTag(e) {
+            document.getElementById('search_' + e.dataset.id).submit(); //e.datase.id = aタグのdata-id取得
+    }
+
     const btn = document.getElementById('comment-btn');
     const form = document.getElementById('comment-form');
     btn.addEventListener('click', () => {

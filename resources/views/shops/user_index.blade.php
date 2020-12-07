@@ -17,12 +17,16 @@
   @include('share.message')
   <div class="tags py-2 bg-warning">
     タグで絞り込む
-    @foreach($tags as $tag)
-  <form action="{{ route('shops.user_index')}}" method="GET" id="serch_{{ $tag->id }}">
-    <input type="hidden" name="tag" value="{{ $tag->id }}">
-    <button type="submit" class="btn btn-info">{{ $tag->name }}</button>
-  </form>
-    @endforeach
+    <div class="d-flex">
+      @foreach($tags as $tag)
+      <form action="{{ route('shops.user_index')}}" method="GET" id="search_{{ $tag->id }}">
+        <div class="mr-2">
+          <input type="hidden" name="tag" value="{{ $tag->id }}">
+          <a href="#" data-id="{{ $tag->id }}" onclick="searchTag(this);"><span class="badge badge-info">{{ $tag->name }}</span></a>
+        </div>
+      </form>
+      @endforeach
+    </div>
   </div>
   <div class="card-deck mt-4">
     <div class="row">
@@ -47,4 +51,5 @@
 </div>
 <!--container-->
 {{ $shops->links() }}
+@include('share.js')
 @endsection

@@ -212,10 +212,9 @@ class ShopsController extends Controller
     //閲覧ユーザーコントローラー
     public function user_index(Request $request)
     {
-
         if(isset($request->tag)){
             $tag = Tag::find($request->tag);
-            $shops = $tag->shops()->get()->unique('id')->paginate(20);
+            $shops = $tag->shops()->paginate(20);
             // dd($shops);
         }else{
             $shops = ShopFormData::search($request);
