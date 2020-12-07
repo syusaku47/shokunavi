@@ -14,12 +14,6 @@
 
 <div class="container">
   <!-- 店舗表示 -->
-  <div class="tags py-2 bg-warning">
-    タグで絞り込む
-    @foreach($tags as $tag)
-    <span class="badge badge-info">{{ $tag->name }}</span>
-    @endforeach
-  </div>
   <div class="single-box  bg-white">
     <div class="card-deck mt-3">
       <div class="row">

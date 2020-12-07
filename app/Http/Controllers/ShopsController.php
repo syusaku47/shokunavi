@@ -212,10 +212,20 @@ class ShopsController extends Controller
     //閲覧ユーザーコントローラー
     public function user_index(Request $request)
     {
-        $shops = ShopFormData::search($request);
+        if(isset($request->tag)){
+            $tag = Tag::find($request->tag);
+            $shops = $tag->shops()->paginate(20);
+            // dd($shops);
+        }else{
+            $shops = ShopFormData::search($request);
+        }
+
+        // タグを取得
+        $tags = Tag::all();
 
         return view('shops.user_index', [
             'shops' => $shops,
+            'tags' => $tags,
         ]);
     }
 
@@ -225,13 +235,15 @@ class ShopsController extends Controller
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
         $comments = $shop->comments()->get();  //口コミ取得
+        $tags = $shop->tags()->get(); 
         return view('shops.user_show')
             ->with(array(
                 'shop' => $shop,
                 'like' => $like,
                 'foods' => $foods,
                 'drinks' => $drinks,
-                'comments' => $comments
+                'comments' => $comments,
+                'tags' => $tags
             ));
     }
 }

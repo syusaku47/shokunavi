@@ -3,11 +3,15 @@
     // 削除ボタンを押してすぐにレコードが削除されないようにjavascriptで確認メッセージを流します。
     // *************************************
     //e = this = aタグ
+    'use strict';
     function deleteContent(e) {
-        'use strict';
         if (confirm('本当に削除していいですか?')) {
             document.getElementById('form_' + e.dataset.id).submit(); //e.datase.id = aタグのdata-id取得
         }
+    }
+
+    function searchTag(e) {
+            document.getElementById('search_' + e.dataset.id).submit(); //e.datase.id = aタグのdata-id取得
     }
 
     const btn = document.getElementById('comment-btn');
