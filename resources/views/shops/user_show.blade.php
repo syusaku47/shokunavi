@@ -9,6 +9,9 @@
   <div class="card">
     <div class="card-header">
       <h4>{{ $shop->name}}</h4>
+      @foreach($tags as $tag)
+      <span class="badge badge-info">{{ $tag->name }}</span>
+      @endforeach
     </div>
     <div class="card-body">
       <p class="card-text">{!! nl2br($shop->catchcopy) !!}</p>
