@@ -147,11 +147,37 @@ class ShopsController extends Controller
         $shop->name = $request->name;
         $shop->catchcopy = $request->catchcopy;
         $shop->recommend = $request->recommend;
+
+
+        $tags = DB::table('shop_tag')
+        ->where('shop_id',$shop->id)
+        ->delete();
+
+        for($i=0; $i<count($request->tag); $i++){
+            $tagId = new ShopTag();
+            $tagId->shop_id = $shop->id;
+            $tagId->tag_id = $request->tag[$i];
+            $tagId->save();
+        }
+
         if ($file = $request->image) {
             $shop->image = ShopFormData::createImage($request);
         }
         $shop->updated_at = Carbon::now();
         $shop->save();
+
+
+// $request->tag[$i];
+
+//         foreach($request as $req){
+//             for($i=0; $i<count($tagsId); $i++){
+//                 if($req->tag[$i]!=$tagsId[$i]['tag_id']){
+                    
+//                 }else{
+
+//             }
+//         }
+//         }
 
         return redirect()->route('shops.show', [
             'shop' => $shop,

@@ -12,7 +12,7 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ['未選択', 'レストラン', '和食', '洋食'];
+        $tags = ['和食', '洋食', 'タイ料理', 'そば', 'うどん', 'お好み焼き', 'しゃぶしゃぶ', '沖縄料理', '韓国料理','フレンチ','ピザ','パスタ','焼き鳥'];
 
         foreach ($tags as $tag) {
             DB::table('tags')->insert([
