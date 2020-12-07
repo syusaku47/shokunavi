@@ -39,11 +39,14 @@ class CommentsController extends Controller
      */
     public function destroy(Shop $shop, Comment $comment)
     {
-        if (Auth::guard('customer')->user()->id == $comment->user->id) {
+        $customer = $shop->customer()->first();
+        if (Auth::guard('customer')->user()->id == $customer->id) {
+            $comments = $shop->comments()->get();
             $comment->delete();
-            redirect()->route('shops.show', [
-                'shop' => $shop->id,
-                'shop' => $shop->id,
+            return redirect()->route('shops.show', [
+                'shop' => $shop,
+                'comments' => $comments,
+
             ]);
         }
     }

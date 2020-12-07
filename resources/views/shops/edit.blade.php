@@ -19,6 +19,17 @@
             <input type="text" class="form-control mb-4" name="name" id="name" value="{{ old('name') ?? $shop->name }}" />
           </div>
 
+          <!-- タグ選択 -->
+          @foreach ($tags as $key => $tag)
+          <div class="form-check form-check-inline">
+            <!-- ここの記載方法で悩み中 -->
+            <input class="form-check-input" type="checkbox" id="check_{{ $loop->iteration }}" name="tag[]" value="{{ $tag->id }}" 
+            {{ ((old('flag')=="validate") && in_array("$tag->id", old('tag'), true)? "checked" :NULL) ?? ((old('flag')!="validate") && in_array($tag->id,$tagId,true)? "checked": NULL )}}>
+            <input type="hidden" name="flag" value="validate">
+            <label class="form-check-label" for="check_{{ $loop->iteration }}">{{ $tag->name }}</label>
+          </div>
+          @endforeach
+
           <div class="form-group">
             <label for="catchcopy">お店紹介文</label>
             <textarea type="text" class="form-control mb-4" rows="5" name="catchcopy" id="catchcopy">{{ old('catchcopy') ?? $shop->catchcopy }}</textarea>
