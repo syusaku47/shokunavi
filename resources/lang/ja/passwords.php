@@ -4,19 +4,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | パスワードリセット言語行
+    | Password Reset Language Lines
     |--------------------------------------------------------------------------
     |
-    | 以下の言語行は既存のパスワードを無効にしたい場合に、無効なトークンや
-    | 新しいパスワードが入力された場合のように、パスワードの更新に失敗した
-    | 理由を示すデフォルトの文言です。
+    | The following language lines are the default lines which match reasons
+    | that are given by the password broker for a password update attempt
+    | has failed, such as for an invalid token or invalid new password.
     |
     */
 
-    'reset' => 'パスワードをリセットしました。',
-    'sent' => 'パスワードリセットメールを送信しました。',
-    'token' => 'このパスワードリセットトークンは無効です。',
-    'user' => "メールアドレスに一致するユーザーは存在していません。",
-    'throttled' => 'ログインに続けて失敗しています。再度お試しください。',
+    'reset' => 'パスワードを再設定しました。',
+    'sent' => 'パスワード再設定リンクを送信しました。',
+    'token' => 'トークンが無効です。',
+    'user' => "入力されたメールアドレスのユーザーは見つかりませんでした。",
 
 ];
