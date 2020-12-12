@@ -9,9 +9,9 @@ class ShopFormData
     public static function createImage($data)
     {
         //画像があれば処理
-        $fileName = time() . $file->getClientOriginalName();
+        $fileName = time() . $data->getClientOriginalName();
         $target_path = public_path('uploads/');
-        $file->move($target_path, $fileName);
+        $data->move($target_path, $fileName);
         return $fileName;
     }
 
