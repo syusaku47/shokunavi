@@ -19,6 +19,11 @@ class Shop extends Model
         return $this->hasMany('App\Models\Food');
     }
 
+    public function seets()
+    {
+        return $this->hasMany('App\Models\Seet');
+    }
+
 
     public function comments()
     {
