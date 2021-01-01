@@ -20,7 +20,7 @@ $date = new DateTime('2020-01-01 00:00:00');
 $timestamp= $date->format('U');
 
 for ($i=0; $i < 48; $i++ ){
-$datelist[] = date('Y-m-d H:i:s', $timestamp + $i * 1800);
+$datelist[] = date('H:i', $timestamp + $i * 1800);
 }
 
 return $datelist;

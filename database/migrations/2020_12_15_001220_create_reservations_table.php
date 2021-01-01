@@ -13,10 +13,10 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('seet_user', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date');
-            $table->datetime('time');
+            $table->time('time');
             $table->integer('num_of_guests');
             $table->integer('user_id')->unsigned();
             $table->integer('seet_id')->unsigned();

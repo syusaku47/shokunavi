@@ -5,6 +5,7 @@
   <div class='text-right mb-4'>
     <a href="{{ route('shops.user_index') }}" class="btn btn-outline-dark">店舗一覧に戻る</a>
   </div>
+  <!-- 予約が成功したら表示 -->
   @if (session('store_reservation_success'))
   <div class="container mt-2">
     <div class="alert alert-success">
@@ -32,11 +33,10 @@
 
     <div class="col-md-3 ml-4 p-0">
       @include('share.error')
-
+      <!-- 予約システム -->
       <div class="text-white text-center bg-secondary w-100 py-2">
         <h4 class="m-0">ネット予約</h4>
       </div>
-      <!-- 予約システム -->
       <form class="border border-default p-4" action="{{ route('shops.reservations.store',['shop' => $shop]) }}" method="POST">
         @csrf
 

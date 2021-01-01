@@ -56,9 +56,15 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Models\Shop', 'App\Models\Like', 'user_id', 'id', null, 'shop_id');
     }
 
+    // public function seets()
+    // {
+    //     return $this->hasManyThrough('App\Models\Seet', 'App\Models\Reservation', 'user_id', 'id', null, 'seet_id');
+    // }
+
     public function seets()
     {
-        return $this->hasManyThrough('App\Models\Seet', 'App\Models\Reservation', 'user_id', 'id', null, 'seet_id');
+        return $this->belongsToMany('App\Models\Seet')
+        ->using('App\Models\Reservation');
     }
 
     public function comments()

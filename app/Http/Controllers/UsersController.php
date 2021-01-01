@@ -33,8 +33,8 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        $shops = $user->shops()->get();
-        $seets = $user->seets()->get();
+        $shops = $user->shops()->get(); //いいねした店舗取得
+        $seets = $user->seets()->get(); //予約した席を取得
         $this->authorize('view', $user);
         return view('users.show', [
             'user' => $user,

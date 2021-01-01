@@ -13,6 +13,11 @@ class Seet extends Model
         return $this->belongsTo('App\Models\Shop');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function type()
     {
         return $this->belongsTo('App\Models\Type');
