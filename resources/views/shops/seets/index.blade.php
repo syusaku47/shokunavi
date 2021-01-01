@@ -29,7 +29,7 @@
             {{ $seet->image }}
             @endif
           </td>
-          <td> {{ $seet->type }}</td>
+          <td> {{ $seet->type->name }}</td>
           <td>{{ $seet->num_of_seets }}席</td>
           <td>{{ $seet->discription }}</td>
           <td><a href="{{route('shops.seets.edit',['shop' => $shop, 'seet' => $seet])}}" class="btn btn-primary">編集</a></td>

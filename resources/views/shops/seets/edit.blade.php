@@ -17,20 +17,20 @@
         @csrf
         <div class="form-group">
           <label for="num_of_seets">席数<span class="badge badge-danger">必須</span></label>
-          <input type="number" class="form-control mb-4" name="num_of_seets" id="num_of_seets" value="{{ old('num_of_seets') }}" />
+          <input type="number" class="form-control mb-4" name="num_of_seets" id="num_of_seets" value="{{ old('num_of_seets') ?? $seet->num_of_seets }}" />
         </div>
         <div class="form-group">
           <label for="type">席タイプ<span class="badge badge-danger">必須</span></label>
           <select name="type" id="type">
-            <option value="テーブル">テーブル</option>
-            <option value="カウンター">カウンター</option>
-            <option value="個室">個室</option>
+            @foreach($types as $key => $type)
+            <option value="{{ $key }}">{{ $type }}</option>
+            @endforeach
           </select>
         </div>
 
         <div class="form-group">
           <label for="discription">詳細<span class="badge badge-danger">必須</span></label>
-          <textarea type="text" class="form-control mb-4" rows="5" name="discription" id="discription" value="{{ old('discription') }}"></textarea>
+          <textarea type="text" class="form-control mb-4" rows="5" name="discription" id="discription" value="{{ old('discription') ?? $seet->discription }}"></textarea>
         </div>
         <div class="text-right">
           <button type="submit" class="btn btn-primary">送信</button>

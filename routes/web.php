@@ -26,6 +26,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
         Route::post('/{id}/likes', 'LikesController@store');
         Route::post('/{id}/likes/{like}', 'LikesController@destroy');
         Route::resource('shops.comments', 'CommentsController', ['only' => ['store']]);
+        Route::resource('shops.reservations', 'ReservationsController', ['only' => ['store', 'destroy']]);
     });
 });
 

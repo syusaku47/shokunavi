@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Models\Shop', 'App\Models\Like', 'user_id', 'id', null, 'shop_id');
     }
 
+    public function seets()
+    {
+        return $this->hasManyThrough('App\Models\Seet', 'App\Models\Reservation', 'user_id', 'id', null, 'seet_id');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');

@@ -34,10 +34,12 @@ class UsersController extends Controller
     public function show(User $user)
     {
         $shops = $user->shops()->get();
+        $seets = $user->seets()->get();
         $this->authorize('view', $user);
         return view('users.show', [
             'user' => $user,
             'shops' => $shops,
+            'seets' => $seets,
         ]);
     }
 

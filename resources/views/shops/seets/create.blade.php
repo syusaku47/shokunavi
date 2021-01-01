@@ -21,10 +21,10 @@
         </div>
         <div class="form-group">
           <label for="type">席タイプ<span class="badge badge-danger">必須</span></label>
-          <select name="type" id="type">
-            <option value="テーブル">テーブル</option>
-            <option value="カウンター">カウンター</option>
-            <option value="個室">個室</option>
+          <select name="type_id" id="type">
+          @foreach($types as $type)
+            <option value="{{ $type->id }}">{{ $type->name }}</option>
+            @endforeach
           </select>
         </div>
 
@@ -38,5 +38,5 @@
       </form>
     </div>
   </div>
-</div>
+</div><!-- container -->
 @endsection

@@ -3,24 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Seet;
+use Carbon\Carbon;
 use App\Models\Shop;
-use App\Models\Type;
+use Auth;
+use App\Models\Reservation;
 
-class SeetsController extends Controller
+class ReservationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Shop $shop)
+    public function index()
     {
-        $seets = Seet::all();
-        return view('shops.seets.index',[
-            'shop' => $shop,
-            'seets' => $seets
-        ]);
+        //
     }
 
     /**
@@ -28,13 +25,9 @@ class SeetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Shop $shop)
+    public function create()
     {
-        $types = Type::all();
-        return view('shops.seets.create',[
-            'shop' => $shop,
-            'types' => $types
-        ]);
+        //
     }
 
     /**
@@ -45,17 +38,18 @@ class SeetsController extends Controller
      */
     public function store(Request $request, Shop $shop)
     {
-
-        $seet = new Seet();
-        $seet->fill($request->all());
-        $seet->shop_id = $shop->id;
-        $seet->save();
+        $reservation = new Reservation();
+        $reservation->fill($request->all());
+        $reservation->user_id = Auth::guard('user')->user()->id;
+        $reservation->seet_id = $request->seetId;
+        $reservation->created_at = Carbon::now();
+        $reservation->updated_at = Carbon::now();
+        $reservation->save();
 
         return redirect()
-        ->route('shops.seets.index',[
+        ->route('shops.user_show',[
             'shop' => $shop
-        ])
-        ->with('store_seet_success','席を作成しました');
+        ])->with('store_reservation_success','予約が完了しました');
 
     }
 
@@ -65,7 +59,7 @@ class SeetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Shop $shop)
+    public function show($id)
     {
         //
     }
@@ -76,10 +70,9 @@ class SeetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit($id)
     {
-        $types = Type::all();
-        return view('shops.seets.edit',compact($shop,$types));
+        //
     }
 
     /**
@@ -89,7 +82,7 @@ class SeetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request, $id)
     {
         //
     }

@@ -15,14 +15,15 @@ class CreateSeetsTable extends Migration
     {
         Schema::create('seets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->integer('type_id')->unsigned();
+            $table->integer('shop_id')->unsigned();
             $table->integer('num_of_seets');
             $table->string('image')->nullable();
             $table->string('discription');
-            $table->integer('shop_id')->unsigned();
             $table->timestamps();
-
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('shop_id')->references('id')->on('shops');
         });
     }
 

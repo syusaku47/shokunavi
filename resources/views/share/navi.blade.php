@@ -5,8 +5,8 @@
       <li class="nav-item"><a href="#drink" class="nav-link" data-toggle="tab">飲み物</a></li>
       <li class="nav-item"><a href="#comment" class="nav-link" data-toggle="tab">口コミ</a></li>
     </ul>
+    
     <div class="tab-content">
-
       <div id="food" class="tab-pane active">
         @foreach ($foods as $food)
         <div class="row border-bottom align-items-center">

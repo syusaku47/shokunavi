@@ -76,7 +76,25 @@
                 </div>
             </div>
             <div id="reservation" class="tab-pane">
-                <h1 class="text-center">準備中</h1>
+            <div class="card-deck mt-4">
+                    <div class="row">
+                        @foreach ($seets as $seet)
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="{{ route('shops.user_show', ['shop'=>$seet->shop->id]) }}" class="card-link">
+                                    <img class="card-img-top" src="/uploads/{{ $seet->shop->image }}">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $seet->shop->name }}</h5>
+                                    <h6 class="card-subtitle text-muted">人数：{{ $seet->num_of_seets }}</h6>
+                                    <p class="card-text">お席：{{ $seet->discription }}</p>
+                                    <a href="{{ route('shops.user_show', ['shop'=>$seet->shop->id]) }}" class="card-link">店舗情報をもっと見る</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </section>
