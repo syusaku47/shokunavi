@@ -35,11 +35,14 @@ class UsersController extends Controller
     {
         $shops = $user->shops()->get(); //いいねした店舗取得
         $seets = $user->seets()->get(); //予約した席を取得
+        $reservations = $user->reservations->where('seet_id')->first();
+        dd($reservations);
         $this->authorize('view', $user);
         return view('users.show', [
             'user' => $user,
             'shops' => $shops,
             'seets' => $seets,
+            'reservation' => $reservations,
         ]);
     }
 

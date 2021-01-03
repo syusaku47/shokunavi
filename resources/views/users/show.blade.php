@@ -86,7 +86,7 @@
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $seet->shop->name }}</h5>
-                                    <h6 class="card-subtitle text-muted">来店人数：{{ $seet->pivot->num_of_guests }}</h6>
+                                    <h6 class="card-subtitle text-muted">来店人数：{{ $seet->num_of_guests }}</h6>
                                     <p class="card-text">
                                     お席：{{ $seet->type->name }}<br>
                                     {{ $seet->discription }}</p>
