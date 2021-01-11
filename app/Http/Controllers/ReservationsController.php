@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Shop;
 use Auth;
+use App\Mail\ReservationSended;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
 {
@@ -38,19 +40,24 @@ class ReservationsController extends Controller
      */
     public function store(Request $request, Shop $shop)
     {
+        // ログインユーザー取得
+        $current_user = Auth::guard('user')->user();
+
         $reservation = new Reservation();
         $reservation->fill($request->all());
-        $reservation->user_id = Auth::guard('user')->user()->id;
+        $reservation->user_id = $current_user->id;
         $reservation->seet_id = $request->seetId;
         $reservation->created_at = Carbon::now();
         $reservation->updated_at = Carbon::now();
         $reservation->save();
 
-        return redirect()
-        ->route('shops.user_show',[
-            'shop' => $shop
-        ])->with('store_reservation_success','予約が完了しました');
+        // メール送信機能 予約がされたらメールが送信される
+        Mail::to($current_user)->send(new ReservationSended($current_user, $reservation));
 
+        return redirect()
+            ->route('shops.user_show', [
+                'shop' => $shop
+            ])->with('store_reservation_success', '予約が完了しました');
     }
 
     /**

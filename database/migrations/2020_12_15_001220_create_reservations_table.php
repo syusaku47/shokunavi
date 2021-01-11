@@ -13,7 +13,7 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seet_user', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date');
             $table->time('time');
@@ -23,7 +23,6 @@ class CreateReservationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('seet_id')->references('id')->on('seets')->onDelete('cascade');
         });
     }
 
