@@ -8,6 +8,7 @@ use App\Models\Shop;
 use App\Models\Tag;
 use App\Models\ShopTag;
 use App\Models\Category;
+use App\Models\Seet;
 use Carbon\Carbon;
 use Auth;
 use App\Services\ShopFormData;
@@ -108,6 +109,7 @@ class ShopsController extends Controller
         $foods = $shop->foods()->where('category_id', 1)->get();   //食事メニュー取得
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
         $tags = $shop->tags()->get();
+        $reservations = $shop->reservations()->get();
         $comments = $shop->comments()->get();  //口コミ取得
 
         return view('shops/show', [
@@ -236,6 +238,7 @@ class ShopsController extends Controller
         $drinks = $shop->foods()->where('category_id', 2)->get();  //ドリンク取得
         $comments = $shop->comments()->get();  //口コミ取得
         $tags = $shop->tags()->get(); 
+        $seets = $shop->seets()->get(); 
         return view('shops.user_show')
             ->with(array(
                 'shop' => $shop,
@@ -243,7 +246,8 @@ class ShopsController extends Controller
                 'foods' => $foods,
                 'drinks' => $drinks,
                 'comments' => $comments,
-                'tags' => $tags
+                'tags' => $tags,
+                'seets' => $seets,
             ));
     }
 }

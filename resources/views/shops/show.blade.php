@@ -28,6 +28,7 @@
 
   <div class="d-flex align-items-center my-4 ">
     <div class="ml-auto">
+      <a class="btn btn-outline-dark" href="{{ route('shops.seets.index',['shop'=>$shop->id]) }}">席の編集</a>
       <a class="btn btn-outline-dark" href="{{ route('shops.foods.edit',['shop'=>$shop->id]) }}">メニューの編集</a>
     </div>
   </div>

@@ -31,8 +31,8 @@ class ResetPassword extends Mailable
     public function build()
     {
         return $this
-        ->subject('パスワード再設定')
-        ->view('mail.password-reset')
-        ->with(['token' => $this->token]);
+            ->subject('パスワード再設定!!!')
+            ->view('mail.password-reset')
+            ->with(['token' => $this->token]);
     }
 }

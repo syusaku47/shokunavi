@@ -26,6 +26,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
         Route::post('/{id}/likes', 'LikesController@store');
         Route::post('/{id}/likes/{like}', 'LikesController@destroy');
         Route::resource('shops.comments', 'CommentsController', ['only' => ['store']]);
+        Route::resource('shops.reservations', 'ReservationsController', ['only' => ['store', 'destroy']]);
     });
 });
 
@@ -44,6 +45,7 @@ Route::group(['prefix' => 'customers'], function () {
 Route::group(['prefix' => 'customers', 'middleware' => 'auth:customer'], function () {
     Route::post('/auth/logout',   'Customer\Auth\LoginController@logout')->name('customers.auth.logout');
     Route::resource('shops', 'ShopsController');
+    Route::resource('shops.seets', 'SeetsController');
     Route::resource('shops.foods', 'FoodsController', ['only' => ['create', 'store', 'destroy']]);
     Route::resource('shops.comments', 'CommentsController', ['only' => ['destroy']]);
     Route::group(['prefix' => 'shops/{shop}/foods',], function () {
